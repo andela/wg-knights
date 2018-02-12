@@ -39,8 +39,10 @@ jobs:
             # npm install
            
             # Setup application
-            wger create-settings
-            
+            wger create-settings --settings-path /wg-knights/wger/settings.py 
+            wger create-settings --database-path /wg-knights/wger/database.sqlite
+            wger bootstrap-wger  --settings-path /wg-knights/wger/settings.py/ --no-start-server
+
       - save_cache:
           paths:
             - ./venv-django
