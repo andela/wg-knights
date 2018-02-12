@@ -28,7 +28,7 @@ if 'DATABASE_URL' in os.environ:
     DATABASES = {'default': dj_database_url.config()}
 
 # Make this unique, and don't share it with anybody.
-SECRET_KEY = os.getenv("SECRET_KEY")
+SECRET_KEY = '$7aeog*h*5ff66zj%%gz*(!y=-=rgrdf8$k#=jnfo*+f@6#xt='
 
 # Your reCaptcha keys
 RECAPTCHA_PUBLIC_KEY = ''
@@ -42,6 +42,7 @@ SITE_URL = os.getenv("SITE_ROOT")
 
 # Path to uploaded files
 # Absolute filesystem path to the directory that will hold user-uploaded files.
+MEDIA_ROOT = '/Users/james/.local/share/wger/media'
 MEDIA_URL = '/media/'
 
 # Allow all hosts to access the application. Change if used in production.
@@ -60,11 +61,3 @@ WGER_SETTINGS['EMAIL_FROM'] = 'wger Workout Manager <wger@example.com>'
 
 # Your twitter handle, if you have one for this instance.
 #WGER_SETTINGS['TWITTER'] = ''
-BASE_DIR = os.path.abspath(os.path.dirname(__file__))
-
-STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
-
-STATICFILES_DIRS = (
-    os.path.join(BASE_DIR, '/wger/core/static/'),
-)
