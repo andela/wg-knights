@@ -39,9 +39,9 @@ jobs:
             # npm install
 
             # Setup application
-            wger create-settings --database-path /home/circleci/wg-knights/wger/database.sqlite
-            wger create-settings --settings-path /home/circleci/wg-knights/wger/settings.py
-            wger bootstrap-wger  --settings-path /home/circleci/wg-knights/wger/settings.py --no-start-server
+            wger create_settings --database-path /home/circleci/wg-knights/wger/database.sqlite
+            wger create_settings --settings-path /home/circleci/wg-knights/wger/settings.py
+            wger bootstrap_wger  --settings-path /home/circleci/wg-knights/wger/settings.py --no-start-server
             
             
       - save_cache:
@@ -57,9 +57,9 @@ jobs:
             . venv-django/bin/activate
             pip install -r requirements_devel.txt
             pip install wger
-            wger create-settings --database-path /home/circleci/wg-knights/wger/database.sqlite
-            wger create-settings --settings-path /home/circleci/wg-knights/wger/settings.py
-            wger bootstrap-wger  --settings-path /home/circleci/wg-knights/wger/settings.py --no-start-server
+            wger create_settings --database-path /home/circleci/wg-knights/wger/database.sqlite
+            wger create_settings --settings-path /home/circleci/wg-knights/wger/settings.py
+            wger bootstrap_wger  --settings-path /home/circleci/wg-knights/wger/settings.py --no-start-server
             python manage.py test
       - store_artifacts:
           path: test-reports
