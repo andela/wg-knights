@@ -39,9 +39,9 @@ jobs:
             # npm install
            
             # Setup application
-            wger create-settings --settings-path /home/circleci/wg-knights/wger/settings.py
-            wger create-settings --database-path /home/circleci/wg-knights/wger/database.sqlite
-            wger bootstrap-wger  --settings-path /home/circleci/wg-knights/wger/settings.py/ --no-start-server
+            wger create-settings --settings-path /home/ubuntu/wg-knights/wger/settings.py
+            wger create-settings --database-path /home/ubuntu/wg-knights/wger/database.sqlite
+            wger bootstrap-wger  --settings-path /home/ubuntu/wg-knights/wger/settings.py --no-start-server
 
       - save_cache:
           paths:
@@ -53,7 +53,7 @@ jobs:
           name: run tests
           command: |
             . venv-django/bin/activate
-            wger create-settings --settings-path /home/circleci/wg-knights/wger/settings.py
+            wger create-settings --settings-path /home/ubuntu/wg-knights/wger/settings.py
             python manage.py test
             coverage run --omit="*/tests/*" --source=wg-knights manage.py test
             COVERALLS_REPO_TOKEN=yCn6oQWxfsXUTlcOOZ8uZQ7Wsj5Ix6OQT coveralls
