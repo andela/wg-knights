@@ -49,5 +49,4 @@ sqlparse==0.2.4
 static3==0.7.0
 urllib3==1.22
 webencodings==0.5.1
--e git+https://github.com/andela/wg-knights.git@e85134cce08c229af979f8437acfde8b51ca925c#egg=wger
 whitenoise==3.3.1
