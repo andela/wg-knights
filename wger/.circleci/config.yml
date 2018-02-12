@@ -40,7 +40,8 @@ jobs:
             if [[ "$DB" = "postgresql" ]]; then pip install psycopg2; fi
 
             # Setup application
-            if [[ "$DB" = "sqlite" ]]; then wger create-settings; fi
+            if [[ "$DB" = "sqlite" ]]; then wger create-settings --database-path /home/circleci/wg-knights/wger/database.sqlite; fi
+            if [[ "$DB" = "sqlite" ]]; then wger bootstrap-wger --settings-path /home/circleci/wg-knights/wger/settings.py --no-start-server; fi
             if [[ "$DB" = "postgresql" ]]; then wger create-settings --database-type postgresql; fi
             
       - save_cache:
@@ -54,8 +55,6 @@ jobs:
           command: |
             . venv-django/bin/activate
             wger create-settings --settings-path /home/circleci/wg-knights/wger/settings.py
-            wger create-settings --database-path /home/circleci/wg-knights/wger/database.sqlite
-            wger bootstrap-wger --settings-path /home/circleci/wg-knights/wger/settings.py --no-start-server
             python manage.py test
       - store_artifacts:
           path: test-reports
