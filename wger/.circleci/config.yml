@@ -55,7 +55,7 @@ jobs:
             . venv-django/bin/activate
             wger create-settings --settings-path /home/ubuntu/wg-knights/wger/settings.py
             python manage.py test
-            coverage run --omit="*/tests/*" --source=wg-knights manage.py test
+            coverage run --omit="*/tests/*" --source=/home/ubuntu/wg-knights manage.py test
             COVERALLS_REPO_TOKEN=yCn6oQWxfsXUTlcOOZ8uZQ7Wsj5Ix6OQT coveralls
       - store_artifacts:
           path: test-reports
