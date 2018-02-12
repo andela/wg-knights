@@ -21,6 +21,7 @@ django-tastypie==0.13.3
 djangorestframework==3.2.5
 docutils==0.14
 easy-thumbnails==2.5
+gunicorn==19.7.1
 html5lib==1.0.1
 icalendar==4.0.0
 idna==2.6
