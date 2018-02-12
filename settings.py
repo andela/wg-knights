@@ -25,7 +25,7 @@ DATABASES = {
 }
 
 # Make this unique, and don't share it with anybody.
-SECRET_KEY = 'mz!+7@hmb_gi$fnsz4ky9v3@79i%x=wi#x9mo&-&%z_ke^lvc1'
+SECRET_KEY = '$7aeog*h*5ff66zj%%gz*(!y=-=rgrdf8$k#=jnfo*+f@6#xt='
 
 # Your reCaptcha keys
 RECAPTCHA_PUBLIC_KEY = ''
@@ -39,7 +39,7 @@ SITE_URL = 'http://localhost:8000'
 
 # Path to uploaded files
 # Absolute filesystem path to the directory that will hold user-uploaded files.
-MEDIA_ROOT = '/Users/basemeraphiona/.local/share/wger/media'
+MEDIA_ROOT = '/Users/james/.local/share/wger/media'
 MEDIA_URL = '/media/'
 
 # Allow all hosts to access the application. Change if used in production.
