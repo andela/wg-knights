@@ -28,8 +28,6 @@ class RegistrationTestCase(WorkoutManagerTestCase):
     '''
     Tests registering a new user
     '''
-
-<<<<<<< HEAD
     def test_registration_captcha(self):
         '''
         Tests that the correct form is used depending on global
@@ -40,21 +38,6 @@ class RegistrationTestCase(WorkoutManagerTestCase):
                                           'ALLOW_REGISTRATION': True,
                                           'ALLOW_GUEST_USERS': True,
                                           'TWITTER': False}):
-            # response = self.client.get(reverse('core:user:registration'))
-            # self.assertIsInstance(response.context['form'], RegistrationForm)
-
-        with self.settings(
-                WGER_SETTINGS={
-                    'USE_RECAPTCHA': False,
-                    'REMOVE_WHITESPACE': False,
-                    'ALLOW_REGISTRATION': True,
-                    'ALLOW_GUEST_USERS': True,
-                    'TWITTER': False
-                }):
-            response = self.client.get(reverse('core:user:registration'))
-            self.assertIsInstance(response.context['form'],
-                                  RegistrationFormNoCaptcha)
-=======
     # def test_registration_captcha(self):
     #     '''
     #     Tests that the correct form is used depending on global
@@ -75,7 +58,17 @@ class RegistrationTestCase(WorkoutManagerTestCase):
     #                                       'TWITTER': False}):
     #         response = self.client.get(reverse('core:user:registration'))
     #         self.assertIsInstance(response.context['form'], RegistrationFormNoCaptcha)
->>>>>>> [Chore #154953753] Fix tests
+
+            response = self.client.get(reverse('core:user:registration'))
+            self.assertIsInstance(response.context['form'], RegistrationForm)
+
+        with self.settings(WGER_SETTINGS={'USE_RECAPTCHA': False,
+                                          'REMOVE_WHITESPACE': False,
+                                          'ALLOW_REGISTRATION': True,
+                                          'ALLOW_GUEST_USERS': True,
+                                          'TWITTER': False}):
+            response = self.client.get(reverse('core:user:registration'))
+            self.assertIsInstance(response.context['form'], RegistrationFormNoCaptcha)
 
     def test_register(self):
 
