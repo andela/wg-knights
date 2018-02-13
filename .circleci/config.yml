@@ -41,7 +41,7 @@ jobs:
 
             # Setup application
             wger create-settings --database-path /home/circleci/wg-knights/wger/database.sqlite
-            wger create_settings --settings-path /home/circleci/wg-knights/wger/settings.py
+            wger create-settings --settings-path /home/circleci/wg-knights/wger/settings.py
             python manage.py makemigrations
             python manage.py migrate
             
@@ -56,8 +56,8 @@ jobs:
             . venv-django/bin/activate
             pip install -r requirements.txt
             pip install wger
-            wger create_settings --database-path /home/circleci/wg-knights/wger/database.sqlite
-            wger create_settings --settings-path /home/circleci/wg-knights/wger/settings.py
+            wger create-settings --database-path /home/circleci/wg-knights/wger/database.sqlite
+            wger create-settings --settings-path /home/circleci/wg-knights/wger/settings.py
             
             python manage.py test
       - store_artifacts:
