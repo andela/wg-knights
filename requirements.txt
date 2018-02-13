@@ -35,6 +35,7 @@ optional-django==0.1.0
 packaging==16.8
 pep8==1.7.1
 Pillow==5.0.0
+psycopg2
 Pygments==2.2.0
 pyparsing==2.2.0
 python-dateutil==2.6.1
