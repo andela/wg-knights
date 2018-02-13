@@ -39,7 +39,7 @@ jobs:
             # npm install
 
             # Setup application
-            wger create_settings --database-path /home/circleci/wg-knights/wger/database.sqlite
+            wger create-settings --database-path /home/circleci/wg-knights/wger/database.sqlite
             wger create_settings --settings-path /home/circleci/wg-knights/wger/settings.py
             python manage.py makemigrations
             python manage.py migrate
