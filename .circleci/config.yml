@@ -26,7 +26,7 @@ jobs:
       # Download and cache dependencies
       - restore_cache:
           keys:
-          - v1-dependencies-{{ checksum "requirements_devel.txt" }}
+          - v1-dependencies-{{ checksum "requirements.txt" }}
           # fallback to using the latest cache if no exact match is found
           - v1-dependencies-
       - run:
@@ -34,7 +34,7 @@ jobs:
           command: |
             python3 -m venv venv-django
             . venv-django/bin/activate
-            pip install -r requirements_devel.txt
+            pip install -r requirements.txt
             pip install wger
             # npm install
 
@@ -48,7 +48,7 @@ jobs:
       - save_cache:
           paths:
             - ./venv-django
-          key: v1-dependencies-{{ checksum "requirements_devel.txt" }}
+          key: v1-dependencies-{{ checksum "requirements.txt" }}
         
       # run tests!
       - run:
@@ -56,7 +56,7 @@ jobs:
           command: |
             python3 -m venv venv-django
             . venv-django/bin/activate
-            pip install -r requirements_devel.txt
+            pip install -r requirements.txt
             pip install wger
             wger create_settings --database-path /home/circleci/wg-knights/wger/database.sqlite
             wger create_settings --settings-path /home/circleci/wg-knights/wger/settings.py
