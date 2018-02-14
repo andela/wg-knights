@@ -14,10 +14,10 @@
 
 
 {% block content %}
-<div><a class="btn btn-success pull-right" href="{% url 'gym:gym:inactive-user-list' gym.pk %}">View Inactive Members</a></div>
-<h3>Active Gym Members</h3>
+<div><a class="btn btn-success pull-right" href="{% url 'gym:gym:user-list' gym.pk %}">View Active Members</a></div>
+<h3>Inactive Gym Members</h3>
 {% if perms.gym.manage_gym or perms.gym.gym_trainer %}
-    {% include 'gym/partial_user_list.html' %}
+    {% include 'gym/partial_inactiveuser_list.html' %}
 {% endif %}
 
 
