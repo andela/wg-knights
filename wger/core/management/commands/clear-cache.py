@@ -22,8 +22,11 @@ from django.core.cache import cache
 
 from wger.core.models import Language
 from wger.manager.models import Workout, WorkoutLog
-from wger.utils.cache import (reset_workout_canonical_form, reset_workout_log,
-                              delete_template_fragment_cache)
+from wger.utils.cache import (
+    reset_workout_canonical_form,
+    reset_workout_log,
+    delete_template_fragment_cache
+)
 
 
 class Command(BaseCommand):
