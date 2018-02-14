@@ -28,7 +28,12 @@ from wger.utils.pdf import styleSheet
 from wger.utils.pdf import render_footer
 
 from reportlab.lib.pagesizes import A4, cm
-from reportlab.platypus import (Paragraph, SimpleDocTemplate, Spacer)
+from reportlab.platypus import (
+    Paragraph,
+    SimpleDocTemplate,
+    Spacer
+)
+
 
 logger = logging.getLogger(__name__)
 

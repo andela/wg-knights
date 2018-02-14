@@ -14,7 +14,11 @@
 #
 # You should have received a copy of the GNU Affero General Public License
 
-from django.conf.urls import (url, include)
+
+from django.conf.urls import (
+    url,
+    include
+)
 from django.views.generic import TemplateView
 from django.contrib.auth import views
 from django.core.urlresolvers import reverse_lazy

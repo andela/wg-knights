@@ -29,8 +29,15 @@ from django.utils.translation import ugettext_lazy
 from django.views.generic import (ListView, DeleteView, CreateView, UpdateView)
 
 from wger.gym.forms import GymUserAddForm, GymUserPermisssionForm
-from wger.gym.helpers import (is_any_gym_admin, get_permission_list)
-from wger.gym.models import (Gym, GymAdminConfig, GymUserConfig)
+from wger.gym.helpers import (
+    is_any_gym_admin,
+    get_permission_list
+)
+from wger.gym.models import (
+    Gym,
+    GymAdminConfig,
+    GymUserConfig
+)
 from wger.config.models import GymConfig as GlobalGymConfig
 from wger.utils.generic_views import (WgerFormMixin, WgerDeleteMixin,
                                       WgerMultiplePermissionRequiredMixin)
