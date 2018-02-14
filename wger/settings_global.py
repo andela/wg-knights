@@ -91,7 +91,7 @@ INSTALLED_APPS = (
 # added list of external libraries to be installed by bower
 BOWER_INSTALLED_APPS = (
     'jquery#2.1.x',
-    'bootstrap',
+    'bootstrap3',
     'd3',
     'shariff',
     'tinymce-dist',
@@ -363,7 +363,7 @@ IGNORABLE_404_URLS = (
 # Consult docs/settings.rst for more information
 #
 WGER_SETTINGS = {
-    'USE_RECAPTCHA': False,
+    'USE_RECAPTCHA': True,
     'REMOVE_WHITESPACE': False,
     'ALLOW_REGISTRATION': True,
     'ALLOW_GUEST_USERS': True,
