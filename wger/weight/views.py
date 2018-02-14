@@ -24,7 +24,6 @@ from django.http import HttpResponseRedirect
 from django.core.urlresolvers import reverse
 from django.core.urlresolvers import reverse_lazy
 from django.contrib.auth.decorators import login_required
-from django.utils import formats
 from django.utils.translation import ugettext as _
 from django.utils.translation import ugettext_lazy
 from django.db.models import Min
@@ -48,9 +47,8 @@ logger = logging.getLogger(__name__)
 
 
 class WeightAddView(WgerFormMixin, CreateView):
-    '''
-    Generic view to add a new weight entry
-    '''
+    """Generic view to add a new weight entry
+    """
     model = WeightEntry
     form_class = WeightForm
     title = ugettext_lazy('Add weight entry')
