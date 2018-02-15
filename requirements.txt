@@ -28,3 +28,10 @@ django-cors-headers
 
 # Python3 compatibility
 six
+
+# For Heroku deployment
+whitenoise==3.3.1
+psycopg2
+dj-database-url==0.4.2
+dj-static==0.0.6
+gunicorn==19.7.1
