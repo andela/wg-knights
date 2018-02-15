@@ -55,8 +55,6 @@ jobs:
             wger create_settings --settings-path /home/circleci/wg-knights/wger/settings.py
             
             python manage.py test
-            coverage run --omit="*/tests/*"
-            COVERALLS_REPO_TOKEN=yCn6oQWxfsXUTlcOOZ8uZQ7Wsj5Ix6OQT coveralls
       - store_artifacts:
           path: test-reports
           destination: test-reports
