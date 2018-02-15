@@ -364,7 +364,7 @@ IGNORABLE_404_URLS = (
 # Consult docs/settings.rst for more information
 #
 WGER_SETTINGS = {
-    'USE_RECAPTCHA': True,
+    'USE_RECAPTCHA': False,
     'REMOVE_WHITESPACE': False,
     'ALLOW_REGISTRATION': True,
     'ALLOW_GUEST_USERS': True,
