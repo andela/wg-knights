@@ -23,13 +23,8 @@ jobs:
     working_directory: ~/wg-knights/wger
     steps:
       - checkout
-      # Download and cache dependencies
-      
-      # - restore_cache:
-      #     keys:
-      #     - v1-dependencies-{{ checksum "requirements.txt" }}
-      #     # fallback to using the latest cache if no exact match is found
-          # - v1-dependencies-
+      # Download dependencies
+     
       - run:
           name: install dependencies
           command: |
@@ -56,7 +51,7 @@ jobs:
             . venv-django/bin/activate
             pip install -r requirements.txt
             pip install wger
-            wger create-settings --database-path /home/circleci/wg-knights/wger/database.sqlite
+            wger create_settings --database-path /home/circleci/wg-knights/wger/database.sqlite
             wger create-settings --settings-path /home/circleci/wg-knights/wger/settings.py
             
             python manage.py test
