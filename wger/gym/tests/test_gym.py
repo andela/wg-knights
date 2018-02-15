@@ -46,12 +46,28 @@ class GymOverviewTest(WorkoutManagerAccessTestCase):
     user_fail = ('member1', 'member2', 'trainer2', 'trainer3', 'trainer4',
                  'manager3')
 
+class GymInactiveUserOverviewTest(WorkoutManagerAccessTestCase):
+    '''
+    Tests accessing the gym inactive user overview page
+    '''
+    url = reverse_lazy('gym:gym:inactive-user-list', kwargs={'pk': 1})
+    anonymous_fail = True
+    user_success = ('admin',
+                    'trainer2',
+                    'trainer3',
+                    'manager1',
+                    'general_manager1',
+                    'general_manager2')
+    user_fail = ('member1',
+                 'member2',
+                 'trainer4',
+                 'manager3')
 
-class GymUserOverviewTest(WorkoutManagerAccessTestCase):
+class GymInactiveUserOverviewTest(WorkoutManagerAccessTestCase):
     '''
-    Tests accessing the gym user overview page
+    Tests accessing the gym inactive user overview page
     '''
-    url = reverse_lazy('gym:gym:user-list', kwargs={'pk': 1})
+    url = reverse_lazy('gym:gym:inactive-user-list', kwargs={'pk': 1})
     anonymous_fail = True
     user_success = ('admin', 'trainer2', 'trainer3', 'manager1',
                     'general_manager1', 'general_manager2')
@@ -214,18 +230,12 @@ class GymInactiveUserOverviewTest(WorkoutManagerAccessTestCase):
     '''
     Tests accessing the gym inactive user overview page
     '''
-    url = reverse_lazy('gym:gym:inactive-user-list', kwargs={'pk': 1})
-    anonymous_fail = True
-    user_success = ('admin',
-                    'trainer2',
-                    'trainer3',
-                    'manager1',
-                    'general_manager1',
-                    'general_manager2')
-    user_fail = ('member1',
-                 'member2',
-                 'trainer4',
-                 'manager3')
+    object_class = Gym
+    url = 'gym:gym:add'
+    data = {'name': 'The name here'}
+    user_success = ('admin', 'general_manager1')
+    user_fail = ('member1', 'member2', 'trainer2', 'trainer3', 'trainer4',
+                 'manager1', 'manager3')
 
 class GymInactiveUserOverviewTest(WorkoutManagerAccessTestCase):
     '''
@@ -261,73 +271,13 @@ class GymInactiveUserOverviewTest(WorkoutManagerAccessTestCase):
                  'trainer4',
                  'manager3')
 
-class GymInactiveUserOverviewTest(WorkoutManagerAccessTestCase):
-    '''
-    Tests accessing the gym inactive user overview page
-    '''
-    url = reverse_lazy('gym:gym:inactive-user-list', kwargs={'pk': 1})
-    anonymous_fail = True
-    user_success = ('admin',
-                    'trainer2',
-                    'trainer3',
-                    'manager1',
-                    'general_manager1',
-                    'general_manager2')
-    user_fail = ('member1',
-                 'member2',
-                 'trainer4',
-                 'manager3')
+    pk = 2
+    object_class = Gym
+    url = 'gym:gym:delete'
+    user_success = ('admin', 'general_manager1', 'general_manager2')
+    user_fail = ('member1', 'member2', 'trainer2', 'trainer3', 'trainer4',
+                 'manager1', 'manager3')
 
-class GymInactiveUserOverviewTest(WorkoutManagerAccessTestCase):
-    '''
-    Tests accessing the gym inactive user overview page
-    '''
-    url = reverse_lazy('gym:gym:inactive-user-list', kwargs={'pk': 1})
-    anonymous_fail = True
-    user_success = ('admin',
-                    'trainer2',
-                    'trainer3',
-                    'manager1',
-                    'general_manager1',
-                    'general_manager2')
-    user_fail = ('member1',
-                 'member2',
-                 'trainer4',
-                 'manager3')
-
-class GymInactiveUserOverviewTest(WorkoutManagerAccessTestCase):
-    '''
-    Tests accessing the gym inactive user overview page
-    '''
-    url = reverse_lazy('gym:gym:inactive-user-list', kwargs={'pk': 1})
-    anonymous_fail = True
-    user_success = ('admin',
-                    'trainer2',
-                    'trainer3',
-                    'manager1',
-                    'general_manager1',
-                    'general_manager2')
-    user_fail = ('member1',
-                 'member2',
-                 'trainer4',
-                 'manager3')
-
-class GymInactiveUserOverviewTest(WorkoutManagerAccessTestCase):
-    '''
-    Tests accessing the gym inactive user overview page
-    '''
-    url = reverse_lazy('gym:gym:inactive-user-list', kwargs={'pk': 1})
-    anonymous_fail = True
-    user_success = ('admin',
-                    'trainer2',
-                    'trainer3',
-                    'manager1',
-                    'general_manager1',
-                    'general_manager2')
-    user_fail = ('member1',
-                 'member2',
-                 'trainer4',
-                 'manager3')
 
 
 class AddGymTestCase(WorkoutManagerAddTestCase):
