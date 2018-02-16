@@ -81,4 +81,3 @@ class FeedbackTestCase(WorkoutManagerTestCase):
         '''
 
         self.send_feedback(logged_in=False)
-    
