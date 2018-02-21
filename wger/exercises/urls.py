@@ -22,8 +22,14 @@ from tastypie.api import Api
 from wger.exercises.api import resources as exercises_api
 from wger.exercises.api import views as exercises_api_views
 
-from wger.exercises.views import (exercises, comments, categories, muscles,
-                                  images, equipment)
+from wger.exercises.views import (
+    exercises,
+    comments,
+    categories,
+    muscles,
+    images,
+    equipment
+)
 
 # sub patterns for muscles
 patterns_muscle = [
