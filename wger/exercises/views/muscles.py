@@ -19,6 +19,7 @@ from django.contrib.auth.mixins import PermissionRequiredMixin, LoginRequiredMix
 from django.core.urlresolvers import reverse, reverse_lazy
 from django.utils.translation import ugettext as _
 from django.utils.translation import ugettext_lazy
+from django.core.cache import cache 
 
 from django.views.generic import (ListView, DeleteView, CreateView, UpdateView)
 
@@ -114,6 +115,11 @@ class MuscleDeleteView(WgerDeleteMixin, LoginRequiredMixin,
         '''
         context = super(MuscleDeleteView, self).get_context_data(**kwargs)
         context['title'] = _(u'Delete {0}?').format(self.object.name)
-        context['form_action'] = reverse(
-            'exercise:muscle:delete', kwargs={'pk': self.kwargs['pk']})
+        context['form_action'] = reverse('exercise:muscle:delete', kwargs={'pk': self.kwargs['pk']})
+
+        '''check if the deleted muscle exists in the cache before resetting'''
+        if cache.get(self.kwargs['pk']):
+            '''reset the cache after a muscle has been deleted'''
+            cache.delete(self.kwargs['pk'])
+
         return context
