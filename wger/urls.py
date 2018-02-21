@@ -120,24 +120,13 @@ router.register(
     base_name='setting-weight-unit')
 
 # Exercises app
-router.register(
-    r'exercise', exercises_api_views.ExerciseViewSet, base_name='exercise')
-router.register(
-    r'equipment', exercises_api_views.EquipmentViewSet, base_name='api')
-router.register(
-    r'exercisecategory',
-    exercises_api_views.ExerciseCategoryViewSet,
-    base_name='exercisecategory')
-router.register(
-    r'exerciseimage',
-    exercises_api_views.ExerciseImageViewSet,
-    base_name='exerciseimage')
-router.register(
-    r'exercisecomment',
-    exercises_api_views.ExerciseCommentViewSet,
-    base_name='exercisecomment')
-router.register(
-    r'muscle', exercises_api_views.MuscleViewSet, base_name='muscle')
+router.register(r'exercise', exercises_api_views.ExerciseViewSet, base_name='exercise')
+router.register(r'equipment', exercises_api_views.EquipmentViewSet, base_name='api')
+router.register(r'exercisedetails', exercises_api_views.ExerciseDetailViewSet, base_name='exercisedetails')
+router.register(r'exercisecategory', exercises_api_views.ExerciseCategoryViewSet, base_name='exercisecategory')
+router.register(r'exerciseimage', exercises_api_views.ExerciseImageViewSet, base_name='exerciseimage')
+router.register(r'exercisecomment', exercises_api_views.ExerciseCommentViewSet, base_name='exercisecomment')
+router.register(r'muscle', exercises_api_views.MuscleViewSet, base_name='muscle')
 
 # Nutrition app
 router.register(
