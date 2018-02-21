@@ -17,6 +17,10 @@
 
 from django.conf.urls import url, include
 from django.contrib.auth.decorators import login_required
+from rest_framework import routers
+from tastypie.api import Api
+from wger.exercises.api import resources as exercises_api
+from wger.exercises.api import views as exercises_api_views
 
 from wger.exercises.views import (exercises, comments, categories, muscles,
                                   images, equipment)
@@ -121,3 +125,19 @@ urlpatterns = [
     url(r'^equipment/', include(patterns_equipment, namespace="equipment")),
     url(r'^', include(patterns_exercise, namespace="exercise")),
 ]
+
+urlpatterns += [
+
+    # API
+    url(r'^api/', include(v1_api.urls)),
+    url(r'^api/v2/exercise/search/$',
+        exercises_api_views.search,
+        name='exercise-search'),
+    url(r'^api/v2/', include(router.urls)),
+]
+
+#
+# URL for user uploaded files, served like this during development only
+#
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
