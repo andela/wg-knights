@@ -29,6 +29,13 @@ if 'DATABASE_URL' in os.environ:
 
 # Make this unique, and don't share it with anybody.
 SECRET_KEY = os.getenv("SECRET_KEY")
+CLIENT_ID = os.getenv('CLIENT_ID')
+SCOPE = os.getenv("SCOPE")
+REDIRECT_URI = os.getenv("REDIRECT_URL")
+
+#authorization variables from fitbit
+AUTHORIZE_URI = os.getenv("AUTHORIZE_URI")
+TOKEN_REQUEST_URI = os.getenv("TOKEN_REQUEST_URI")
 
 # Your reCaptcha keys
 RECAPTCHA_PUBLIC_KEY = ''
