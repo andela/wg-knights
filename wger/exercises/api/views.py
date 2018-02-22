@@ -213,8 +213,9 @@ class ExerciseDetailViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = Exercise.objects.all()
     serializer_class = ExerciseDetailSerializer
     ordering_fields = 'name'
-    filter_fields = ('category','creation_date','description','muscles','muscles_secondary',
-                     'name','equipment','license_author')
+    filter_fields = ('category', 'creation_date', 'description', 'language',
+                     'muscles', 'muscles_secondary', 'status', 'name',
+                     'equipment', 'license', 'license_author')
 
 @api_view(['GET'])
 def filter(request):
