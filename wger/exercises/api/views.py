@@ -69,7 +69,6 @@ class ExerciseViewSet(viewsets.ModelViewSet):
         obj.set_author(self.request)
         obj.save()
 
-
 @api_view(['GET'])
 def search(request):
     '''
@@ -77,19 +76,27 @@ def search(request):
 
     This format is currently used by the exercise search autocompleter
     '''
+
     q = request.GET.get('term', None)
     results = []
     json_response = {}
-
+    
     if q:
         languages = load_item_languages(
             LanguageConfig.SHOW_ITEM_EXERCISES,
             language_code=request.GET.get('language', None))
-        exercises = (Exercise.objects.filter(name__icontains=q)
+        print (languages.data)
+        if isinstance(q, int):
+            exercises = (Exercise.objects.filter(id=q)
                      .filter(language__in=languages)
                      .filter(status=Exercise.STATUS_ACCEPTED).order_by(
                          'category__name', 'name').distinct())
-
+        else:
+            exercises = (Exercise.objects.filter(name__icontains=q)
+                        .filter(language__in=languages)
+                        .filter(status=Exercise.STATUS_ACCEPTED).order_by(
+                            'category__name', 'name').distinct())
+        
         for exercise in exercises:
             if exercise.main_image:
                 image_obj = exercise.main_image
@@ -114,6 +121,8 @@ def search(request):
         json_response['suggestions'] = results
 
     return Response(json_response)
+
+
 
 
 class EquipmentViewSet(viewsets.ReadOnlyModelViewSet):
@@ -206,3 +215,56 @@ class ExerciseDetailViewSet(viewsets.ReadOnlyModelViewSet):
     ordering_fields = 'name'
     filter_fields = ('category','creation_date','description','muscles','muscles_secondary',
                      'name','equipment','license_author')
+
+@api_view(['GET'])
+def filter(request):
+    '''
+    Searches for exercises.
+
+    This format is currently used by the exercise search autocompleter
+    '''
+
+    q = request.GET.get('term', None)
+    results = []
+    json_response = {}
+    
+    if q:
+        languages = load_item_languages(
+            LanguageConfig.SHOW_ITEM_EXERCISES,
+            language_code=request.GET.get('language', None))
+        print (languages.data)
+        if isinstance(q, int):
+            exercises = (Exercise.objects.filter(id=q)
+                    .filter(language__in=languages)
+                    .filter(status=Exercise.STATUS_ACCEPTED).order_by(
+                        'category__name', 'name').distinct())
+        else:
+            exercises = (Exercise.objects.filter(name__icontains=q)
+                        .filter(language__in=languages)
+                        .filter(status=Exercise.STATUS_ACCEPTED).order_by(
+                            'category__name', 'name').distinct())
+        
+        for exercise in exercises:
+            if exercise.main_image:
+                image_obj = exercise.main_image
+                image = image_obj.image.url
+                t = get_thumbnailer(image_obj.image)
+                thumbnail = t.get_thumbnail(aliases.get('micro_cropped')).url
+            else:
+                image = None
+                thumbnail = None
+
+            exercise_json = {
+                'value': exercise.name,
+                'data': {
+                    'id': exercise.id,
+                    'name': exercise.name,
+                    'category': _(exercise.category.name),
+                    'image': image,
+                    'image_thumbnail': thumbnail
+                }
+            }
+            results.append(exercise_json)
+        json_response['suggestions'] = results
+
+    return Response(json_response)
