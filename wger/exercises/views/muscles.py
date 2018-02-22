@@ -27,6 +27,7 @@ from wger.exercises.models import Muscle
 from wger.utils.generic_views import (WgerFormMixin, WgerDeleteMixin)
 from wger.utils.language import load_item_languages
 from wger.config.models import LanguageConfig
+from wger.utils.cache import cache_mapper
 
 logger = logging.getLogger(__name__)
 
@@ -36,10 +37,15 @@ class MuscleListView(ListView):
     Overview of all muscles and their exercises
     '''
     model = Muscle
-    queryset = Muscle.objects.all().order_by('-is_front', 'name'),
     context_object_name = 'muscle_list'
     template_name = 'muscles/overview.html'
 
+    def get_queryset(self):
+        '''Retrieves new set of muscles after cache refresh.
+        '''
+        queryset = Muscle.objects.all().order_by('-is_front', 'name')
+        return queryset,
+    
     def get_context_data(self, **kwargs):
         '''
         Send some additional data to the template
@@ -117,9 +123,6 @@ class MuscleDeleteView(WgerDeleteMixin, LoginRequiredMixin,
         context['title'] = _(u'Delete {0}?').format(self.object.name)
         context['form_action'] = reverse('exercise:muscle:delete', kwargs={'pk': self.kwargs['pk']})
 
-        '''check if the deleted muscle exists in the cache before resetting'''
-        if cache.get(self.kwargs['pk']):
-            '''reset the cache after a muscle has been deleted'''
-            cache.delete(self.kwargs['pk'])
-
+        '''reset cache when a muscle is deleted'''
+        cache.clear()
         return context
