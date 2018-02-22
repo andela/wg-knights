@@ -228,7 +228,7 @@ def filter(request):
             language_code=request.GET.get('language', None))
         print (languages.data)
         if isinstance(q, int):
-            exercises = (Exercise.objects.filter(id=q)
+            exercises = (Exercise.objects.filter(name__icontains=q)
                     .filter(language__in=languages)
                     .filter(status=Exercise.STATUS_ACCEPTED).order_by(
                         'category__name', 'name').distinct())
