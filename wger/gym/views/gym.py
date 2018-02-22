@@ -108,7 +108,7 @@ class GymUserListView(LoginRequiredMixin, WgerMultiplePermissionRequiredMixin,
         '''
         Pass other info to the template
         '''
-        context = super(GymInactiveUserListView, self).get_context_data(**kwargs)
+        context = super(GymUserListView, self).get_context_data(**kwargs)
         context['gym'] = Gym.objects.get(pk=self.kwargs['pk'])
         context['admin_count'] = len(context['object_list']['admins'])
         context['user_count'] = len(context['object_list']['members'])
