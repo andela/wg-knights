@@ -18,6 +18,7 @@ from rest_framework import serializers
 from wger.exercises.models import (Muscle, Exercise, ExerciseImage,
                                    ExerciseCategory, Equipment,
                                    ExerciseComment)
+from wger.exercises.api.resources import ExerciseResource
 
 
 class ExerciseSerializer(serializers.ModelSerializer):
