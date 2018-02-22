@@ -39,10 +39,11 @@ class MuscleListView(ListView):
     model = Muscle
     context_object_name = 'muscle_list'
     template_name = 'muscles/overview.html'
-
+    
     def get_queryset(self):
         '''Retrieves new set of muscles after cache refresh.
         '''
+        cache.clear()
         queryset = Muscle.objects.all().order_by('-is_front', 'name')
         return queryset,
     
@@ -122,7 +123,4 @@ class MuscleDeleteView(WgerDeleteMixin, LoginRequiredMixin,
         context = super(MuscleDeleteView, self).get_context_data(**kwargs)
         context['title'] = _(u'Delete {0}?').format(self.object.name)
         context['form_action'] = reverse('exercise:muscle:delete', kwargs={'pk': self.kwargs['pk']})
-
-        '''reset cache when a muscle is deleted'''
-        cache.clear()
         return context
