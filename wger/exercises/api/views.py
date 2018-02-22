@@ -85,17 +85,10 @@ def search(request):
         languages = load_item_languages(
             LanguageConfig.SHOW_ITEM_EXERCISES,
             language_code=request.GET.get('language', None))
-        print (languages.data)
-        if isinstance(q, int):
-            exercises = (Exercise.objects.filter(name__icontains=q)
-                     .filter(language__in=languages)
-                     .filter(status=Exercise.STATUS_ACCEPTED).order_by(
-                         'category__name', 'name').distinct())
-        else:
-            exercises = (Exercise.objects.filter(name__icontains=q)
-                        .filter(language__in=languages)
-                        .filter(status=Exercise.STATUS_ACCEPTED).order_by(
-                            'category__name', 'name').distinct())
+        exercises = (Exercise.objects.filter(name__icontains=q)
+                    .filter(language__in=languages)
+                    .filter(status=Exercise.STATUS_ACCEPTED).order_by(
+                        'category__name', 'name').distinct())
         
         for exercise in exercises:
             if exercise.main_image:
