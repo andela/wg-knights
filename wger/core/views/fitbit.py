@@ -99,7 +99,7 @@ class FitBit:
        
         if response.status_code == 200:
             j = response.json()
-            import pdb; pdb.set_trace()
+            # import pdb; pdb.set_trace()
             return response.json()
 
        
