@@ -156,6 +156,8 @@ class WorkoutLogForm(ModelForm):
     weight = DecimalField(label=_('Weight'),
                           initial=0,
                           required=False)
+    session_id = IntegerField(label=_('Session'),
+                        required=False)
 
     class Meta:
         model = WorkoutLog
@@ -168,7 +170,7 @@ class HelperWorkoutSessionForm(ModelForm):
     '''
     class Meta:
         model = WorkoutSession
-        exclude = ('user', 'workout', 'date')
+        exclude = ('user', 'workout', 'date', 'worklog')
 
 
 class WorkoutSessionForm(ModelForm):
@@ -177,7 +179,7 @@ class WorkoutSessionForm(ModelForm):
     '''
     class Meta:
         model = WorkoutSession
-        exclude = ('user', 'workout', 'date')
+        exclude = ('user', 'workout', 'date', 'worklog')
 
 
 class WorkoutSessionHiddenFieldsForm(ModelForm):
