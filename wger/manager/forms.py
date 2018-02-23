@@ -155,7 +155,10 @@ class WorkoutLogForm(ModelForm):
                           required=False)
     session_id = IntegerField(label=_('Session'),
                         required=False)
+<<<<<<< HEAD
 >>>>>>> [Bg #154953762] add foreign key in workout logs from sessions
+=======
+>>>>>>> c556c2cda9b9692a9f18740d5fca249f5e36e457
 
     class Meta:
         model = WorkoutLog

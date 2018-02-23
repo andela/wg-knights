@@ -718,14 +718,24 @@ class WorkoutSession(models.Model):
         (IMPRESSION_GOOD, _('Good')),
     )
 
+<<<<<<< HEAD
     user = models.ForeignKey(User, verbose_name=_('User'))
+=======
+    user = models.ForeignKey(User,
+                             verbose_name=_('User'))
+>>>>>>> c556c2cda9b9692a9f18740d5fca249f5e36e457
     '''
     The user the workout session belongs to
 
     See note in weight.models.WeightEntry about why this is not editable=False
     '''
 
+<<<<<<< HEAD
     workout = models.ForeignKey(Workout, verbose_name=_('Workout'))
+=======
+    workout = models.ForeignKey(Workout,
+                                verbose_name=_('Workout'))
+>>>>>>> c556c2cda9b9692a9f18740d5fca249f5e36e457
     '''
     The workout the session belongs to
     '''
@@ -735,16 +745,25 @@ class WorkoutSession(models.Model):
     The date the workout session was performed
     '''
 
+<<<<<<< HEAD
     notes = models.TextField(
         verbose_name=_('Notes'),
         null=True,
         blank=True,
         help_text=_('Any notes you might want to save about this workout '
                     'session.'))
+=======
+    notes = models.TextField(verbose_name=_('Notes'),
+                             null=True,
+                             blank=True,
+                             help_text=_('Any notes you might want to save about this workout '
+                                         'session.'))
+>>>>>>> c556c2cda9b9692a9f18740d5fca249f5e36e457
     '''
     User notes about the workout
     '''
 
+<<<<<<< HEAD
     impression = models.CharField(
         verbose_name=_('General impression'),
         max_length=2,
@@ -752,18 +771,38 @@ class WorkoutSession(models.Model):
         default=IMPRESSION_NEUTRAL,
         help_text=_('Your impression about this workout session. '
                     'Did you exercise as well as you could?'))
+=======
+    impression = models.CharField(verbose_name=_('General impression'),
+                                  max_length=2,
+                                  choices=IMPRESSION,
+                                  default=IMPRESSION_NEUTRAL,
+                                  help_text=_('Your impression about this workout session. '
+                                              'Did you exercise as well as you could?'))
+>>>>>>> c556c2cda9b9692a9f18740d5fca249f5e36e457
     '''
     The user's general impression of workout
     '''
 
+<<<<<<< HEAD
     time_start = models.TimeField(
         verbose_name=_('Start time'), blank=True, null=True)
+=======
+    time_start = models.TimeField(verbose_name=_('Start time'),
+                                  blank=True,
+                                  null=True)
+>>>>>>> c556c2cda9b9692a9f18740d5fca249f5e36e457
     '''
     Time the workout session started
     '''
 
+<<<<<<< HEAD
     time_end = models.TimeField(
         verbose_name=_('Finish time'), blank=True, null=True)
+=======
+    time_end = models.TimeField(verbose_name=_('Finish time'),
+                                blank=True,
+                                null=True)
+>>>>>>> c556c2cda9b9692a9f18740d5fca249f5e36e457
     '''
     Time the workout session ended
     '''
@@ -778,9 +817,13 @@ class WorkoutSession(models.Model):
         '''
         Set other properties
         '''
+<<<<<<< HEAD
         ordering = [
             "date",
         ]
+=======
+        ordering = ["date", ]
+>>>>>>> c556c2cda9b9692a9f18740d5fca249f5e36e457
         unique_together = ("date", "user")
 
     def clean(self):
@@ -788,6 +831,7 @@ class WorkoutSession(models.Model):
         Perform some additional validations
         '''
 
+<<<<<<< HEAD
         if (not self.time_end
                 and self.time_start) or (self.time_end
                                          and not self.time_start):
@@ -798,6 +842,13 @@ class WorkoutSession(models.Model):
         if self.time_end and self.time_start and self.time_start > self.time_end:
             raise ValidationError(
                 _("The start time cannot be after the end time."))
+=======
+        if (not self.time_end and self.time_start) or (self.time_end and not self.time_start):
+            raise ValidationError(_("If you enter a time, you must enter both start and end time."))
+
+        if self.time_end and self.time_start and self.time_start > self.time_end:
+            raise ValidationError(_("The start time cannot be after the end time."))
+>>>>>>> c556c2cda9b9692a9f18740d5fca249f5e36e457
 
     def get_owner_object(self):
         '''
