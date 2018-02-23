@@ -32,7 +32,7 @@ $(document).ready(function() {
         Main Content
 -->
 {% block content %}
-{% cache cache_timeout exercise-overview-mobile language.id %}
+{% cache cache_timeout 1-overview-mobile language.id %}
 {% regroup exercises by category as exercise_list %}
 <div class="panel-group" id="accordion">
     {% for item in exercise_list %}
@@ -69,7 +69,7 @@ $(document).ready(function() {
                                     <h4 class="media-heading">{{ exercise.name }}</h4>
                                     <span class="text-muted">
                                         {% for equipment in exercise.equipment.all %}
-                                            {% trans equipment.name %}
+                                            {{ equipment.name }}
                                             {% if not forloop.last %},{% endif %}
                                         {% endfor %}
                                     </span>

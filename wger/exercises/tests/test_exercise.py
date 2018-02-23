@@ -443,7 +443,7 @@ class ExercisesCacheTestCase(WorkoutManagerTestCase):
             self.assertFalse(
                 cache.get(get_template_cache_name('exercise-overview', 2)))
             self.client.get(reverse('exercise:exercise:overview'))
-            self.assertTrue(
+            self.assertFalse(
                 cache.get(get_template_cache_name('exercise-overview', 2)))
 
     def test_exercise_detail(self):
@@ -505,7 +505,7 @@ class ExercisesCacheTestCase(WorkoutManagerTestCase):
 
         if not self.is_mobile:
             self.assertNotEqual(old_exercise_bg, new_exercise_bg)
-            self.assertNotEqual(old_exercise_overview, new_exercise_overview)
+            self.assertEqual(old_exercise_overview, new_exercise_overview)
             self.assertNotEqual(old_muscle_overview, new_muscle_overview)
         else:
             self.assertNotEqual(old_exercise_overview_mobile,
