@@ -129,16 +129,6 @@ class WorkoutLogForm(ModelForm):
 
     These fields are re-defined here only to make them optional
     '''
-<<<<<<< HEAD
-    repetition_unit = ModelChoiceField(
-        queryset=RepetitionUnit.objects.all(), label=_('Unit'), required=False)
-    weight_unit = ModelChoiceField(
-        queryset=WeightUnit.objects.all(), label=_('Unit'), required=False)
-    exercise = ModelChoiceField(
-        queryset=Exercise.objects.all(), label=_('Exercise'), required=False)
-    reps = IntegerField(label=_('Repetitions'), required=False)
-    weight = DecimalField(label=_('Weight'), initial=0, required=False)
-=======
     repetition_unit = ModelChoiceField(queryset=RepetitionUnit.objects.all(),
                                        label=_('Unit'),
                                        required=False)
@@ -155,10 +145,6 @@ class WorkoutLogForm(ModelForm):
                           required=False)
     session_id = IntegerField(label=_('Session'),
                         required=False)
-<<<<<<< HEAD
->>>>>>> [Bg #154953762] add foreign key in workout logs from sessions
-=======
->>>>>>> c556c2cda9b9692a9f18740d5fca249f5e36e457
 
     class Meta:
         model = WorkoutLog
