@@ -6,7 +6,7 @@
 
 {% block content %}
 <ul class="list-group">
-    {% for muscle in muscle_list %}
+    {% for muscle in muscle_list|first %}
     <li class="list-group-item ">
         <div class="btn-group pull-right">
             <button type="button" class="btn btn-default dropdown-toggle btn-xs" data-toggle="dropdown">
