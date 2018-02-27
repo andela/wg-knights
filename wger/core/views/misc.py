@@ -15,9 +15,11 @@
 # You should have received a copy of the GNU Affero General Public License
 
 import logging
+import dateutil.parser
 
 from django.conf import settings
-from django.shortcuts import render
+from django.shortcuts import render, redirect
+from .fitbit import FitBit
 from django.http import HttpResponseRedirect
 from django.core.exceptions import ObjectDoesNotExist
 from django.core.urlresolvers import reverse, reverse_lazy
@@ -208,3 +210,33 @@ class FeedbackClass(FormView):
         mail.mail_admins(subject, message)
 
         return super(FeedbackClass, self).form_valid(form)
+
+
+@login_required
+def fitbitLogin(request):
+    fitbit = FitBit()
+    login_url = fitbit.ComposeAuthorizationuri()
+    return redirect(login_url)
+
+@login_required
+def fitbitFetch(request):
+    code = request.GET.get('code')
+    fitbit = FitBit()
+    token = fitbit.RequestAccessToken(code)
+    try:
+       
+        data = fitbit.GetWeight(token)
+       
+        for weight in data['weight']:
+            
+            weight_entry = WeightEntry()
+            weight_entry.user = request.user
+            weight_entry.weight = weight['weight']
+            weight_entry.date = weight['date']
+            try:
+                weight_entry.save()    
+            except Exception as e:
+                pass
+    except Exception as e:
+        pass
+    return HttpResponseRedirect(reverse('core:dashboard'))
