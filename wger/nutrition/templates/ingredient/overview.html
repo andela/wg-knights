@@ -70,6 +70,17 @@
                placeholder="{% trans 'ingredient name' %}"
                style="width:100%;">
     </form>
+</br>
+<h4>{% trans "Search by Language" %}</h4>
+<select id="dynamic-select" class="selectpicker">
+        {% for short_name, long_name in languages %}
+        {% if filter_by == short_name %}
+        <option value="{% url 'nutrition:ingredient:list' %}?filter_by={{ short_name }}" selected>{{ long_name }}</option>
+        {% else %}
+        <option value="{% url 'nutrition:ingredient:list' %}?filter_by={{ short_name }}">{{ long_name }}</option>
+        {% endif %}
+        {% endfor %}
+  </select>
 {% endblock %}
 
 

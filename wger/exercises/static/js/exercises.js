@@ -18,7 +18,7 @@
  wger exercise functions
  */
 
-'use strict';
+"use strict";
 
 /*
  Highlight a muscle in the overview
@@ -28,27 +28,33 @@ function wgerHighlightMuscle(element) {
   var muscleId;
   var isFront;
   var divId;
-  divId = $(element).data('target');
-  isFront = ($(element).data('isFront') === 'True') ? 'front' : 'back';
+  divId = $(element).data("target");
+  isFront = $(element).data("isFront") === "True" ? "front" : "back";
   muscleId = divId.match(/\d+/);
 
   // Reset all other highlighted muscles
-  $muscle = $('.muscle');
-  $muscle.removeClass('muscle-active');
-  $muscle.addClass('muscle-inactive');
+  $muscle = $(".muscle");
+  $muscle.removeClass("muscle-active");
+  $muscle.addClass("muscle-inactive");
 
   // Highlight the current one
-  $(element).removeClass('muscle-inactive');
-  $(element).addClass('muscle-active');
+  $(element).removeClass("muscle-inactive");
+  $(element).addClass("muscle-active");
 
   // Set the corresponding background
-  $('#muscle-system').css('background-image',
-    'url(/static/images/muscles/main/muscle-' + muscleId + '.svg),' +
-    'url(/static/images/muscles/muscular_system_' + isFront + '.svg)');
+  $("#muscle-system").css(
+    "background-image",
+    "url(/static/images/muscles/main/muscle-" +
+      muscleId +
+      ".svg)," +
+      "url(/static/images/muscles/muscular_system_" +
+      isFront +
+      ".svg)"
+  );
 
   // Show the corresponding exercises
-  $('.exercise-list').hide();
-  $('#' + divId).show();
+  $(".exercise-list").hide();
+  $("#" + divId).show();
 }
 
 /*
@@ -65,20 +71,20 @@ function wgerDrawWeightLogChart(data, divId) {
     minValues = [];
     chartData = [];
     for (i = 0; i < data.length; i++) {
-      chartData[i] = MG.convert.date(data[i], 'date');
+      chartData[i] = MG.convert.date(data[i], "date");
 
       // Read the possible repetitions for the chart legend
       legend[i] = data[i][0].reps;
 
       // Read the minimum values for each repetition
-      minValues[i] = d3.min(data[i], function (repetitionData) {
+      minValues[i] = d3.min(data[i], function(repetitionData) {
         return repetitionData.weight;
       });
     }
 
     MG.data_graphic({
       data: chartData,
-      y_accessor: 'weight',
+      y_accessor: "weight",
       min_y: d3.min(minValues),
       aggregate_rollover: true,
       full_width: true,
@@ -87,8 +93,27 @@ function wgerDrawWeightLogChart(data, divId) {
       right: 10,
       height: 200,
       legend: legend,
-      target: '#svg-' + divId,
-      colors: ['#204a87', '#4e9a06', '#ce5c00', '#5c3566', '#2e3436', '8f5902', '#a40000']
+      target: "#svg-" + divId,
+      colors: [
+        "#204a87",
+        "#4e9a06",
+        "#ce5c00",
+        "#5c3566",
+        "#2e3436",
+        "8f5902",
+        "#a40000"
+      ]
     });
   }
 }
+
+// Select URL function
+// $(function() {
+//   $("#dynamic-select").on("change", function() {
+//     var url = $(this).val();
+//     if (url) {
+//       window.location = url;
+//     }
+//     return false;
+//   });
+// });

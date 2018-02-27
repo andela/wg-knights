@@ -32,10 +32,12 @@ from django.utils.translation import ugettext as _
 from django.utils.translation import ugettext_lazy
 from django.views.generic import (ListView, DeleteView, CreateView, UpdateView)
 
+from wger.core.models import Language
 from wger.manager.models import WorkoutLog
 from wger.exercises.models import (Exercise, Muscle, ExerciseCategory)
 from wger.utils.generic_views import (WgerFormMixin, WgerDeleteMixin)
-from wger.utils.language import load_language, load_item_languages
+from wger.utils.language import (load_language, load_item_languages, 
+                                load_exercise_languages)
 from wger.utils.cache import cache_mapper
 from wger.utils.widgets import (TranslatedSelect, TranslatedSelectMultiple,
                                 TranslatedOriginalSelectMultiple)
@@ -54,11 +56,21 @@ class ExerciseListView(ListView):
     template_name = 'exercise/overview.html'
     context_object_name = 'exercises'
 
+    def dispatch(self, *args, **kwargs):
+        self.filter_by = self.request.GET.get('filter_by', None)
+        try:
+            self.language = Language.objects.get(short_name=self.filter_by)
+        except Language.DoesNotExist:
+            self.language = None
+        return super().dispatch(*args, **kwargs)
+
     def get_queryset(self):
         '''
         Filter to only active exercises in the configured languages
         '''
-        languages = load_item_languages(LanguageConfig.SHOW_ITEM_EXERCISES)
+        # languages = load_item_languages(self, Language.pk)
+        languages = load_exercise_languages(self.request,
+                                              filter_by_lang=self.language.pk if self.language else None)
         return Exercise.objects.accepted() \
             .filter(language__in=languages) \
             .order_by('category__id') \
@@ -70,6 +82,7 @@ class ExerciseListView(ListView):
         '''
         context = super(ExerciseListView, self).get_context_data(**kwargs)
         context['show_shariff'] = True
+        context['filter_by'] = self.filter_by
         return context
 
 

@@ -120,7 +120,7 @@ class ExerciseCategoryCacheTestCase(WorkoutManagerTestCase):
             get_template_cache_name('exercise-overview-mobile', 2))
 
         if not self.is_mobile:
-            self.assertNotEqual(old_exercise_overview, new_exercise_overview)
+            self.assertEqual(old_exercise_overview, new_exercise_overview)
         else:
             self.assertNotEqual(old_exercise_overview_mobile,
                                 new_exercise_overview_mobile)

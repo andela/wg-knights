@@ -2,13 +2,12 @@
 {% load i18n %}
 {% load staticfiles %}
 {% load wger_extras %}
-{% load cache %}
 {% load thumbnail %}
 
 <!--
         Title
 -->
-{% block title %}{% trans "Exercises" %}{% endblock %}
+{% block title %}{% trans "Exercises" %} {% endblock %}
 
 
 
@@ -38,7 +37,6 @@ $(document).ready(function() {
 -->
 {% block content %}
 
-{% cache cache_timeout exercise-overview language.id %}
 {% regroup exercises by category as exercise_list %}
 <ul class="nav nav-tabs">
     {% for item in exercise_list %}
@@ -78,7 +76,7 @@ $(document).ready(function() {
                         <h4 class="media-heading">{{ exercise.name }}</h4>
                         <span class="text-muted">
                             {% for equipment in exercise.equipment.all %}
-                                {% trans equipment.name %}
+                                {{ equipment.name }}
                                 {% if not forloop.last %},{% endif %}
                             {% endfor %}
                         </span>
@@ -96,7 +94,6 @@ $(document).ready(function() {
     </div>
     {% endfor %}
 </div>
-{% endcache %}
 
 
 {% endblock %}
@@ -112,6 +109,20 @@ $(document).ready(function() {
            id="exercise-search"
            class="ajax-form-element form-control"
            placeholder="{% trans 'exercise name' %}">
+        </br>
+        <h4>{% trans "Search by Language" %}</h4>
+        <select id="dynamic-select" class="selectpicker">
+                {% for short_name, long_name in languages  %}
+                {{ short_name }}
+                {% if filter_by == short_name %}
+                
+                <option value="{% url 'exercise:exercise:overview' %}?filter_by={{ short_name }}" selected>{{ long_name }}</option>
+
+                {% else %}
+                <option value="{% url 'exercise:exercise:overview' %}?filter_by={{ short_name }}">{{ long_name }}</option>
+                {% endif %}
+                {% endfor %}
+          </select>
 {% endblock %}
 
 

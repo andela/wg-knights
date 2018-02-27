@@ -83,7 +83,7 @@ def load_item_languages(item, language_code=None):
     return languages
 
 
-def load_ingredient_languages(request):
+def load_ingredient_languages(request, filter_by_lang=None):
     '''
     Filter the ingredients the user will see by its language.
 
@@ -96,7 +96,10 @@ def load_ingredient_languages(request):
     '''
 
     language = load_language()
-    languages = load_item_languages(LanguageConfig.SHOW_ITEM_INGREDIENTS)
+    if not filter_by_lang:
+        languages = load_item_languages(LanguageConfig.SHOW_ITEM_INGREDIENTS)
+    else:
+        languages = list([Language.objects.get(pk=filter_by_lang)])
 
     # Only registered users have a profile
     if request.user.is_authenticated():
@@ -105,6 +108,25 @@ def load_ingredient_languages(request):
 
         # If the user's language is not english and has the preference, add english to the list
         if show_english and language.short_name != 'en':
-            languages = list(set(languages + [Language.objects.get(pk=2)]))
+            languages = list(set(languages + [Language.objects.get(pk=2)]))      
+
+    return languages
+
+def load_exercise_languages(request, filter_by_lang=None):
+    '''
+    Filter the exercises the user will see by its language.
+
+    Additionally, if the user has selected on his preference page that he wishes
+    to also see the exercises in English, show those too.
+
+    This only makes sense if the user's language isn't English, as he will be
+    presented those in that case anyway, so also do a check for this.
+    '''
+
+    # language = load_language()
+    if not filter_by_lang:
+        languages = load_item_languages(LanguageConfig.SHOW_ITEM_EXERCISES)
+    else:
+        languages = list([Language.objects.get(pk=filter_by_lang)])     
 
     return languages
