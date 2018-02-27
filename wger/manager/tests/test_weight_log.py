@@ -253,6 +253,14 @@ class WeightlogTestCase(WorkoutManagerTestCase):
         workout1 = Workout.objects.get(pk=2)
         workout2 = Workout.objects.get(pk=2)
 
+        session1 = WorkoutSession()
+        session1.user = user1
+        session1.workout = workout1
+        session1.notes = 'Something here'
+        session1.impression = '3'
+        session1.date = datetime.date(2014, 1, 5)
+        session1.save()
+
         WorkoutLog.objects.all().delete()
         log1 = WorkoutLog()
         log1.user = user1
@@ -261,15 +269,8 @@ class WeightlogTestCase(WorkoutManagerTestCase):
         log1.workout = workout1
         log1.weight = 10
         log1.reps = 10
+        log1.session_id = WorkoutSession.objects.get(id=session1.id)
         log1.save()
-
-        session1 = WorkoutSession()
-        session1.user = user1
-        session1.workout = workout1
-        session1.notes = 'Something here'
-        session1.impression = '3'
-        session1.date = datetime.date(2014, 1, 5)
-        session1.save()
 
         session2 = WorkoutSession()
         session2.user = user1

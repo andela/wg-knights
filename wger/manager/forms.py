@@ -129,14 +129,22 @@ class WorkoutLogForm(ModelForm):
 
     These fields are re-defined here only to make them optional
     '''
-    repetition_unit = ModelChoiceField(
-        queryset=RepetitionUnit.objects.all(), label=_('Unit'), required=False)
-    weight_unit = ModelChoiceField(
-        queryset=WeightUnit.objects.all(), label=_('Unit'), required=False)
-    exercise = ModelChoiceField(
-        queryset=Exercise.objects.all(), label=_('Exercise'), required=False)
-    reps = IntegerField(label=_('Repetitions'), required=False)
-    weight = DecimalField(label=_('Weight'), initial=0, required=False)
+    repetition_unit = ModelChoiceField(queryset=RepetitionUnit.objects.all(),
+                                       label=_('Unit'),
+                                       required=False)
+    weight_unit = ModelChoiceField(queryset=WeightUnit.objects.all(),
+                                   label=_('Unit'),
+                                   required=False)
+    exercise = ModelChoiceField(queryset=Exercise.objects.all(),
+                                label=_('Exercise'),
+                                required=False)
+    reps = IntegerField(label=_('Repetitions'),
+                        required=False)
+    weight = DecimalField(label=_('Weight'),
+                          initial=0,
+                          required=False)
+    session_id = IntegerField(label=_('Session'),
+                        required=False)
 
     class Meta:
         model = WorkoutLog
@@ -150,7 +158,7 @@ class HelperWorkoutSessionForm(ModelForm):
 
     class Meta:
         model = WorkoutSession
-        exclude = ('user', 'workout', 'date')
+        exclude = ('user', 'workout', 'date', 'worklog')
 
 
 class WorkoutSessionForm(ModelForm):
@@ -160,7 +168,7 @@ class WorkoutSessionForm(ModelForm):
 
     class Meta:
         model = WorkoutSession
-        exclude = ('user', 'workout', 'date')
+        exclude = ('user', 'workout', 'date', 'worklog')
 
 
 class WorkoutSessionHiddenFieldsForm(ModelForm):
