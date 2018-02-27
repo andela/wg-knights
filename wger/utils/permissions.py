@@ -81,3 +81,14 @@ class UpdateOnlyPermission(permissions.BasePermission):
     def has_permission(self, request, view):
         return (request.user and request.user.is_authenticated()
                 and request.method in ['GET', 'HEAD', 'OPTIONS', 'PATCH'])
+
+
+class CreateUserApiPermission(permissions.BasePermission):
+    '''
+    Custom permission that restricts the user access API create user
+    endpoint if not authorized
+    '''
+
+    def has_permission(self, request, view):
+            user = request.user
+            return user.userprofile.can_use_api_to_create_user

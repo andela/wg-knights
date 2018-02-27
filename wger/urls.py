@@ -155,6 +155,9 @@ router.register(
     weight_api_views.WeightEntryViewSet,
     base_name='weightentry')
 
+# User creation
+router.register(r'create_user', core_api_views.UserCreationViewSet, base_name='api-create-user')
+
 from django.contrib import admin
 admin.autodiscover()
 

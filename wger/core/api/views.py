@@ -15,18 +15,37 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with Workout Manager.  If not, see <http://www.gnu.org/licenses/>.
 
-from django.contrib.auth.models import User
-from rest_framework import viewsets
+from django.contrib.auth.models import User  # as Django_User, User
+from django.utils import translation
+from rest_framework import viewsets, status
 from rest_framework.response import Response
 from rest_framework.decorators import detail_route
 
-from wger.core.models import (UserProfile, Language, DaysOfWeek, License,
-                              RepetitionUnit, WeightUnit)
+from wger.config.models import GymConfig
+from wger.gym.models import (
+    AdminUserNote,
+    GymUserConfig,
+    Contract
+)
+
+from wger.core.models import (
+    UserProfile,
+    Language,
+    DaysOfWeek,
+    License,
+    RepetitionUnit,
+    WeightUnit)
 from wger.core.api.serializers import (
-    UsernameSerializer, LanguageSerializer, DaysOfWeekSerializer,
-    LicenseSerializer, RepetitionUnitSerializer, WeightUnitSerializer)
+    UsernameSerializer,
+    UserCreationSerializer,
+    LanguageSerializer,
+    DaysOfWeekSerializer,
+    LicenseSerializer,
+    RepetitionUnitSerializer,
+    WeightUnitSerializer
+)
 from wger.core.api.serializers import UserprofileSerializer
-from wger.utils.permissions import UpdateOnlyPermission, WgerPermission
+from wger.utils.permissions import (UpdateOnlyPermission, WgerPermission, CreateUserApiPermission)
 
 
 class UserProfileViewSet(viewsets.ModelViewSet):
@@ -108,3 +127,60 @@ class WeightUnitViewSet(viewsets.ReadOnlyModelViewSet):
     serializer_class = WeightUnitSerializer
     ordering_fields = '__all__'
     filter_fields = ('name', )
+
+
+class UserCreationViewSet(viewsets.ModelViewSet):
+    '''
+    API end point for user creation
+    '''
+    is_private = True
+    serializer_class = UserCreationSerializer
+    permission_classes = (CreateUserApiPermission,)
+    queryset = User.objects.all()
+
+    def perform_create(self, request):
+        """
+        Create user from API
+        """
+        creator = UserProfile.objects.get(user=self.request.user)
+
+        # Check if they can be allowed to create users
+        if creator and creator.can_use_api_to_create_user:
+            serialized = self.get_serializer(data=self.request.data)
+            if serialized.is_valid():
+                username = serialized.data['username']
+                email = serialized.data['email']
+                password = self.request.data['password']
+
+                api_user = User.objects.create_user(username=username,
+                                                    email=email,
+                                                    password=password)
+                api_user.save()
+
+                language = Language.objects.get(
+                    short_name=translation.get_language())
+                api_user.userprofile.notification_language = language
+
+                # Set default gym, if needed
+                gym_config = GymConfig.objects.get(pk=1)
+                if gym_config.default_gym:
+                    api_user.userprofile.gym = gym_config.default_gym
+
+                    # Create gym user configuration object
+                    config = GymUserConfig()
+                    config.gym = gym_config.default_gym
+                    config.user = api_user
+                    config.save()
+
+                api_user.userprofile.created_by = creator.user.username
+
+                api_user.userprofile.save()
+
+                return Response({'detail': 'User created successfully'}, status.HTTP_201_CREATED)
+            else:
+                return Response({'detail': 'Please check the credentials and try again'},
+                                status.HTTP_400_BAD_REQUEST)
+
+        else:
+            return Response({'detail': 'Application not allowed to access this resource'},
+                            status.HTTP_400_BAD_REQUEST)
