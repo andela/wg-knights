@@ -18,6 +18,25 @@
 
 
 {% block sidebar %}
+<h4>{% trans "Other Login Options" %}</h4>
+<p>
+    <a href="{% url 'social:begin' 'twitter'%}" class="btn btn-block btn-default">
+        <span class="{% fa_class 'sign-in' %}"></span>
+        {% trans "twitter" %}
+    </a>
+</p>
+<p>
+    <a href="{% url 'social:begin' 'facebook' %}" class="btn btn-block btn-default">
+        <span class="{% fa_class 'sign-in' %}"></span>
+        {% trans "Facebook" %}
+    </a>
+</p>
+<p>
+    <a href="{% url 'social:begin' 'google-oauth2' %}" class="btn btn-block btn-default">
+        <span class="{% fa_class 'sign-in' %}"></span>
+        {% trans "Google" %}
+    </a>
+</p>
 <h4>{% trans "No account?" %}</h4>
 <p>
     <a href="{% url 'core:user:registration' %}" class="btn btn-block btn-default">
