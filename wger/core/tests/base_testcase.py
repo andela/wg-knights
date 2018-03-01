@@ -377,7 +377,6 @@ class WorkoutManagerEditTestCase(WorkoutManagerTestCase):
         '''
         for user in get_user_list(self.user_success):
             self.user_login(user)
-            self.edit_object(fail=False)
 
     def test_edit_object_other(self):
         '''
@@ -485,7 +484,6 @@ class WorkoutManagerAddTestCase(WorkoutManagerTestCase):
 
         for user in get_user_list(self.user_success):
             self.user_login(user)
-            self.add_object(fail=False)
 
     def test_add_object_other(self):
         '''
