@@ -159,7 +159,11 @@ class WorkoutManagerTestCase(BaseTestCase, TestCase):
         self.client.login(username=user, password=password)
         self.current_user = user
         self.current_password = password
-
+        if self.client.login(username=user, password=password):
+            return True
+        else:
+            return False
+            
     def user_logout(self):
         '''
         Visit the logout page
@@ -376,7 +380,8 @@ class WorkoutManagerEditTestCase(WorkoutManagerTestCase):
         Tests editing the object as the authorized users
         '''
         for user in get_user_list(self.user_success):
-            self.user_login(user)
+            user_login = self.user_login(user)
+            self.assertTrue(user_login)
 
     def test_edit_object_other(self):
         '''
@@ -483,7 +488,8 @@ class WorkoutManagerAddTestCase(WorkoutManagerTestCase):
         '''
 
         for user in get_user_list(self.user_success):
-            self.user_login(user)
+            user_login = self.user_login(user)
+            self.assertTrue(user_login)
 
     def test_add_object_other(self):
         '''
