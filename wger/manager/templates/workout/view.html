@@ -205,6 +205,26 @@ an appointment for each training day with the appropriate exercises.{% endblockt
         </div>
     </div>
 </div>
+<div class="modal fade" id="export-workout">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title">{% trans "Export Workout" %}</h4>
+            </div>
+            <div class="modal-body">
+                <p>
+                <a href="{% url 'manager:workout:export' workout.id %}" class="btn btn-block btn-default" id="download-pdf-button">
+                   {% trans "Export Workout" %}
+                </a>
+                </p>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">{% trans "Close" %}</button>
+            </div>
+        </div>
+    </div>
+</div>
 {% endblock %}
 
 
@@ -249,6 +269,12 @@ an appointment for each training day with the appropriate exercises.{% endblockt
             <a href="{% url 'manager:workout:copy' workout.id %}" class="wger-modal-dialog">
                <span class="{% fa_class 'clone' %}"></span>
                {% trans "Make a copy of this workout" %}
+            </a>
+        </li>
+        <li>
+            <a data-toggle="modal" data-target="#export-workout">
+                <span class="{% fa_class 'download' %}"></span>
+                {% trans "Export Workout" %}
             </a>
         </li>
         {% if is_owner %}

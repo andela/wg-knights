@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-
 # This file is part of wger Workout Manager.
 #
 # wger Workout Manager is free software: you can redistribute it and/or modify
@@ -14,12 +13,15 @@
 #
 # You should have received a copy of the GNU Affero General Public License
 
+import csv
 import logging
 import uuid
 import datetime
 
+from django.utils.encoding import smart_str
 from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponseRedirect, HttpResponseForbidden
+from django.http.response import HttpResponse
 from django.template.context_processors import csrf
 from django.core.urlresolvers import reverse, reverse_lazy
 from django.utils.translation import ugettext_lazy, ugettext as _
@@ -408,3 +410,47 @@ def timer(request, day_pk):
     context['weight_units'] = WeightUnit.objects.all()
     context['repetition_units'] = RepetitionUnit.objects.all()
     return render(request, 'workout/timer.html', context)
+
+
+@login_required
+def export_workout(request, pk):
+    '''
+    exports a users workouts to csv format 
+    '''
+    if request.user.is_anonymous():
+        return HttpResponseForbidden()
+
+    workouts = get_object_or_404(Workout, pk=pk, user=request.user)
+
+    column_heading = ['Exercise', 'Repetitions']
+    
+    with open('/tmp/workouts.csv', 'w', newline='') as csvfile:
+        for workout in workouts.canonical_representation['day_list']:
+            days = workout['days_of_week']['text'].split(',')
+            name = "Workout name: "+ str(workout['obj'])
+            exercises_data = [[a_workout['obj'], a_workout['setting_text']] \
+                    for a_workout in workout['set_list'][0]['exercise_list']]
+
+        writer = csv.DictWriter(csvfile, fieldnames=column_heading)
+        write_outfile = csv.writer(csvfile)
+        write_outfile.writerow([name])
+        write_outfile.writerow(["Workout days: "+", ".join(days)])
+        writer.writeheader()
+        
+        for exercise in exercises_data:
+            writer.writerow({
+                'Exercise': exercise[0].name,
+                'Repetitions':exercise[1]
+            })
+
+    fp = open('/tmp/workouts.csv')
+    
+    response = HttpResponse(
+        fp.read(), content_type='application/force-download'
+    )
+    fp.close()
+   
+    response['Content-Disposition'] = 'attachment; filename={}'.format(
+        smart_str('workouts.csv')
+    )
+    return response
