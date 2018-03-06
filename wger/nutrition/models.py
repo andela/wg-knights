@@ -667,6 +667,19 @@ class MealItem(models.Model):
     '''
     An item (component) of a meal
     '''
+    Planned_Meal = 'PM'
+    Consumed_meal = 'CM'
+
+    MealChoice =(
+        (Planned_Meal, 'Meal Planned'),
+        (Consumed_meal, 'Consumed Meal'),
+    )
+
+    meal_choice = models.CharField(
+        max_length = 2,
+        choices = MealChoice,
+        default = Planned_Meal)
+
     meal = models.ForeignKey(
         Meal, verbose_name=_('Nutrition plan'), editable=False)
     ingredient = models.ForeignKey(Ingredient, verbose_name=_('Ingredient'))
