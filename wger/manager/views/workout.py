@@ -259,7 +259,7 @@ class LastWeightHelper:
     def get_last_weight(self, exercise, reps, default_weight):
         '''
         Returns an emtpy string if no entry is found
-
+        
         :param exercise:
         :param reps:
         :param default_weight:
@@ -411,7 +411,7 @@ def timer(request, day_pk):
     context['repetition_units'] = RepetitionUnit.objects.all()
     return render(request, 'workout/timer.html', context)
 
-
+    
 @login_required
 def export_workout(request, pk):
     '''

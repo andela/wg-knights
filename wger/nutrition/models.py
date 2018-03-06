@@ -667,7 +667,6 @@ class MealItem(models.Model):
     '''
     An item (component) of a meal
     '''
-
     meal = models.ForeignKey(
         Meal, verbose_name=_('Nutrition plan'), editable=False)
     ingredient = models.ForeignKey(Ingredient, verbose_name=_('Ingredient'))
@@ -793,4 +792,3 @@ def delete_cache_data_on_change(sender, **kwargs):
         cache.delete(cache_mapper.get_nutrition_plan_key(signal_instance.get_owner_object().id))
     if isinstance(signal_instance, (NutritionPlan)):
         cache.delete(cache_mapper.get_nutrition_plan_key(signal_instance.id))
-        

@@ -42,6 +42,9 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
+    #for social login use
+    'social_django',
+
     # Uncomment the next line to enable the admin:
     'django.contrib.admin',
 
@@ -121,13 +124,20 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django.middleware.locale.LocaleMiddleware',
 
+    #social login
+    'social_django.middleware.SocialAuthExceptionMiddleware',
+
     # Django mobile
     'django_mobile.middleware.MobileDetectionMiddleware',
     'django_mobile.middleware.SetFlavourMiddleware',
 )
 
 AUTHENTICATION_BACKENDS = ('django.contrib.auth.backends.ModelBackend',
-                           'wger.utils.helpers.EmailAuthBackend')
+                           'wger.utils.helpers.EmailAuthBackend',
+                           'social_core.backends.twitter.TwitterOAuth',
+                            'social_core.backends.facebook.FacebookOAuth2', 
+                            'social_core.backends.google.GoogleOAuth2',
+                            'social_core.backends.google.GoogleOAuth',)
 
 TEMPLATES = [
     {
@@ -145,6 +155,10 @@ TEMPLATES = [
                 'django.template.context_processors.static',
                 'django.template.context_processors.tz',
                 'django.contrib.messages.context_processors.messages',
+
+                #social login
+                'social_django.context_processors.backends',
+                'social_django.context_processors.login_redirect',
 
                 # Django mobile
                 'django_mobile.context_processors.flavour',
@@ -255,6 +269,13 @@ LOGGING = {
     }
 }
 
+#social login keys for twitter
+SOCIAL_AUTH_TWITTER_KEY = os.getenv("TWITTER_KEY")
+SOCIAL_AUTH_TWITTER_SECRET = os.getenv("TWITTER_SECRET")
+SOCIAL_AUTH_FACEBOOK_KEY = os.getenv("FACEBOOK_KEY")
+SOCIAL_AUTH_FACEBOOK_SECRET = os.getenv("FACEBOOK_ID")
+SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = os.getenv("GOOGLE_KEY")
+SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = os.getenv("GOOGLE_SECRET")
 #
 # ReCaptcha
 #
