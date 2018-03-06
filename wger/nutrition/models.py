@@ -805,4 +805,3 @@ def delete_cache_data_on_change(sender, **kwargs):
         cache.delete(cache_mapper.get_nutrition_plan_key(signal_instance.get_owner_object().id))
     if isinstance(signal_instance, (NutritionPlan)):
         cache.delete(cache_mapper.get_nutrition_plan_key(signal_instance.id))
-        

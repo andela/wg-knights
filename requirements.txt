@@ -21,6 +21,7 @@ invoke
 requests
 npm
 coverage
+social-auth-app-django==2.1.0
 
 # REST API
 djangorestframework>=3.2,<3.3

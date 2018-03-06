@@ -1590,7 +1590,8 @@
             "category": 8,
             "uuid": "c56078d2-ae85-4524-a467-d1e143b6df1a",
             "muscles": [
-                1
+                1,
+                20
             ],
             "license": 1,
             "name": "Biceps curls with barbell"
@@ -1687,7 +1688,8 @@
             "category": 8,
             "uuid": "38919515-ce04-4383-9c3f-5846edd0e844",
             "muscles": [
-                1
+                1,
+                20
             ],
             "license": 1,
             "name": "Biceps curls with SZ-bar"
@@ -1711,7 +1713,8 @@
             "category": 8,
             "uuid": "48a59aa8-4568-409c-8afe-f8cb99c558ea",
             "muscles": [
-                1
+                1,
+                20
             ],
             "license": 1,
             "name": "Biceps curls with dumbbell"
@@ -1824,7 +1827,8 @@
             "category": 8,
             "uuid": "6dcc9adb-939c-4581-9e44-d0d73753997b",
             "muscles": [
-                1
+                1,
+                20
             ],
             "license": 1,
             "name": "Hammercurls"
@@ -2880,7 +2884,8 @@
             "category": 8,
             "uuid": "5baf40e5-ea3c-4f8d-b60a-d294ee2de55b",
             "muscles": [
-                1
+                1,
+                20
             ],
             "license": 1,
             "name": "Hammercurls on cable"
@@ -3119,7 +3124,7 @@
             "category": 13,
             "uuid": "79a3a34c-262f-4cae-b827-b5a85b11b860",
             "muscles": [
-                2
+                2, 17
             ],
             "license": 1,
             "name": "Lateral raises on cable, one armed"
@@ -3887,7 +3892,8 @@
             "category": 8,
             "uuid": "84b4e711-8b29-4541-ad58-dad967f82390",
             "muscles": [
-                13
+                13,
+                20
             ],
             "license": 1,
             "name": "Preacher Curls"
@@ -4063,7 +4069,8 @@
             "uuid": "eed05679-d1cb-44a2-a17d-dd5b0097c874",
             "muscles": [
                 12,
-                9
+                9,
+                19
             ],
             "license": 1,
             "name": "Pendelay rows"
@@ -4590,7 +4597,9 @@
             "creation_date": "2014-03-09",
             "category": 13,
             "uuid": "53ca25b3-61d9-4f72-bfdb-492b83484ff5",
-            "muscles": [],
+            "muscles": [
+                17
+            ],
             "license": 1,
             "name": "Arnold Shoulder Press"
         },
@@ -4640,7 +4649,9 @@
             "category": 13,
             "uuid": "89e6d2ea-9a17-4a77-9a52-d5bcf39d57fd",
             "muscles": [
-                2
+                2,
+                17,
+                19
             ],
             "license": 1,
             "name": "Military Press"
@@ -5147,7 +5158,10 @@
             "creation_date": "2014-06-12",
             "category": 8,
             "uuid": "8aadcd68-f085-44a0-a897-8b6ecf827ed0",
-            "muscles": [],
+            "muscles": [
+                17,
+                19
+            ],
             "license": 1,
             "name": "Military Press"
         },
@@ -5296,7 +5310,8 @@
             "category": 13,
             "uuid": "a7e15f4f-a7e6-4c0c-9bcb-ef3de90201aa",
             "muscles": [
-                2
+                2,
+                19
             ],
             "license": 1,
             "name": "Cable External Rotation"
@@ -6089,7 +6104,8 @@
             "uuid": "7738fb4e-8f17-4aeb-84ef-2ee3e12eaff7",
             "muscles": [
                 1,
-                13
+                13,
+                20
             ],
             "license": 2,
             "name": "Z Curls"
