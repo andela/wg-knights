@@ -30,7 +30,7 @@ if 'DATABASE_URL' in os.environ:
 # Make this unique, and don't share it with anybody.
 SECRET_KEY = os.getenv("SECRET_KEY")
 CLIENT_ID = os.getenv('CLIENT_ID')
-SCOPE = os.getenv("SCOPE")
+# SCOPE = os.getenv["SCOPE"]
 REDIRECT_URI = os.getenv("REDIRECT_URL")
 
 #authorization variables from fitbit
