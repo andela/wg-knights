@@ -451,18 +451,6 @@ class WorkoutManagerAddTestCase(WorkoutManagerTestCase):
             self.assertEqual(self.pk_before, self.pk_after)
             self.assertEqual(count_before, count_after)
 
-        else:
-            self.assertEqual(response.status_code, 302)
-            self.assertGreater(self.pk_after, self.pk_before)
-            entry = self.object_class.objects.get(pk=self.pk_after)
-
-            # Check that the data is correct
-            for i in [j for j in self.data if j not in self.data_ignore]:
-                current_field = getattr(entry, i)
-                self.compare_fields(current_field, self.data[i])
-
-            self.assertEqual(count_before + 1, count_after)
-
             # TODO: the redirection page might not have a language prefix (e.g. /user/login
             #       instead of /en/user/login) so there is an additional redirect
             # # The page we are redirected to doesn't trigger an error
