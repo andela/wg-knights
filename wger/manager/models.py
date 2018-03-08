@@ -250,6 +250,12 @@ class Schedule(models.Model):
                     "in a loop (i.e. A, B, C, A, B, C, and so on)"))
     '''A flag indicating whether the schedule should act as a loop'''
 
+    use_periodization = models.BooleanField(
+        verbose_name=_('Use periodization'),
+        default=False,
+        help_text=_("Tick the box if you want to use periodized schedules "))
+    '''A flag indicating whether the schedule uses periodization'''
+
     def __str__(self):
         '''
         Return a more human-readable representation
@@ -339,7 +345,7 @@ class ScheduleStep(models.Model):
         help_text=_('The duration in weeks'),
         default=4,
         validators=[MinValueValidator(1),
-                    MaxValueValidator(25)])
+                    MaxValueValidator(52)])
     '''The duration in weeks'''
 
     order = models.IntegerField(verbose_name=_('Order'), default=1)
@@ -899,12 +905,12 @@ class WorkoutLog(models.Model):
         if not date:
             date = self.date
 
-        
+
         # print(self.session_id.notes , "it is me")
         try:
             if not self.session_id:
                 return WorkoutSession.objects.filter( user=self.user).get(date=date)
-        
+
             session_id = self.session_id
             return WorkoutSession.objects.filter(
             user=self.user).get(date=date, id=session_id.id)

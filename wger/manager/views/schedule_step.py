@@ -71,6 +71,10 @@ class StepCreateView(WgerFormMixin, CreateView, PermissionRequiredMixin):
         '''Set the schedule and the order'''
 
         schedule = Schedule.objects.get(pk=self.kwargs['schedule_pk'])
+        if not schedule.use_periodization and form.cleaned_data['duration'] > 25:
+            # normal scheduled steps should not exceed 25 weeks
+            form.add_error('duration', 'Ensure that duration value is equal or less than 25')
+            return super(StepCreateView, self).form_invalid(form)
 
         max_order = schedule.schedulestep_set.all().aggregate(
             models.Max('order'))
