@@ -193,7 +193,7 @@
                 <h4 class="panel-title">
                      {% if schedule.use_periodization %}
                      <label class="label label-success">
-                       {% if step.duration > 1 and step.duration < 7  %}
+                         {% if step.duration > 1 and step.duration < 7  %}
                     {% blocktrans count weeks=step.duration %}
                     {% plural %} {{ weeks }} weeks (Mesocycle)
                     {% endblocktrans %}
@@ -203,9 +203,9 @@
                     {% plural %} {{ weeks }} weeks (Macrocycle)
                     {% endblocktrans %}
 
-                    {% elif step.duration < 2  %}
-                    {% blocktrans count weeks=step.duration %}
-                    {% plural %} {{ weeks }} week (Microcycle)
+                    {% elif step.duration == 1  %}
+                    {% blocktrans count weeks=step.duration %}{{ weeks }} week (Microcycle)
+                         {% plural %}{{ weeks }} Weeks
                     {% endblocktrans %}
                          </label>
                         {% endif  %}

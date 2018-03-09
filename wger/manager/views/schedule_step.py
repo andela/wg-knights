@@ -136,5 +136,5 @@ class StepDeleteView(WgerDeleteMixin, DeleteView, PermissionRequiredMixin):
         context = super(StepDeleteView, self).get_context_data(**kwargs)
         context['title'] = _(u'Delete {0}?').format(self.object)
         context['form_action'] = reverse(
-            'core:license:delete', kwargs={'pk': self.kwargs['pk']})
+            'manager:step:delete', kwargs={'pk': self.kwargs['pk']})
         return context
