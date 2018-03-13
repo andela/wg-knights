@@ -1,6 +1,7 @@
 {
   "name": "wg-knights",
-  "scripts": {},
+  "scripts": {
+  },
   "env": {
     "DISABLE_COLLECTSTATIC": {
       "required": true
@@ -11,11 +12,10 @@
       "quantity": 1
     }
   },
-  "addons": ["heroku-postgresql"],
+  "addons": [
+    "heroku-postgresql"
+  ],
   "buildpacks": [
-    {
-      "url": "heroku/nodejs"
-    },
     {
       "url": "heroku/python"
     }
