@@ -45,47 +45,40 @@
                         
                         <div class="carousel-inner">
                                 <div class="item active">
-                                    <img style="opacity: 0.9;" src="{% static 'images/carousel-images/weight-tracker.jpeg' %}" alt="Weight TYracker">
+                                    <img style="opacity: 0.9;" src="{% static 'images/carousel-images/weight-tracker.jpeg' %}" alt="Weight Tracker">
+                                    <div class="carousel-caption" style="margin-top:-400px;">
+                                        <div style="margin-right: -790px !important;">
+                                            {% if allow_guest_users and not user.is_authenticated %}
+                                            <button class="btn btn-secondary" style="background-color:black">
+                                                    <a href="{% url 'core:user:demo-entries' %}" class="page-scroll btn btn-btn-lg" rel="nofollow" style="margin-top: 1em; font-size:20px; color:white">
+                                                            {% trans "Try it now" %}
+                                                        </a>
+                                            </button>
+                                            
+                                        {% endif %}
                                 
-                                   
-                                      
-                                    <div class="carousel-caption" style="margin-top:-500px;">
-                                            <div style="margin-right: -790px !important; opacity:0.9;">
-                                                    {% if allow_guest_users and not user.is_authenticated %}
-                                                    <button class="btn-primary-outline">
-                                                            <a href="{% url 'core:user:demo-entries' %}" class="page-scroll btn btn-btn-lg" rel="nofollow" style="margin-top: 1em; font-size:20px; font-family: 'Rammetto One', cursive;">
-                                                                    {% trans "Try it now" %}
-                                                                </a>
-                                                    </button>
-                                                    
-                                                {% endif %}
-                                        
-                                                {% if not user.is_authenticated or user.userprofile.is_temporary %}
-                                                    {% if allow_registration %}
-                                                    <button class="btn-primary-outline">
-                                                            <a href="{% url 'core:user:registration' %}" class="page-scroll btn btn-btn-sm" style="margin-top: 1em; font-size:20px; font-family: 'Rammetto One', cursive;">
-                                                                    {% trans "Register" %}
-                                                                </a>
-                                                    </button>
-                                                        
-                                                    {% endif %}
-                                                    <button class="btn-primary-outline">
-                                                    <a href="{% url 'core:user:login' %}" class="page-scroll btn btn-btn-sm" style="margin-top: 1em; font-size:20px; font-family: 'Rammetto One', cursive;">
-                                                        {% trans "Login" %}
-                                                    </a>
-                                                    </button>
-                                                {% endif %}
-                                            </div>
-                                        <div class="img1" style="box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); margin-left: -170px !important;" >
-                                                <h2>
-                                                        <div style="color:#204a87; font-family: 'Berkshire Swash', cursive; font-size:120px;">
-                                                                Wger
-                                                        </div>
-                                                        </h2>
-                                            <h3>Weight Tracker</h3>
+                                        {% if not user.is_authenticated or user.userprofile.is_temporary %}
+                                            {% if allow_registration %}
+                                            <button class="btn btn-secondary" style="background-color:black;">
+                                                    <a href="{% url 'core:user:registration' %}" class="page-scroll btn btn-btn-sm" style="margin-top: 1em; font-size:20px; color:white">
+                                                            {% trans "Register" %}
+                                                        </a>
+                                            </button>
+                                                
+                                            {% endif %}
+                                            <button class="btn btn-secondary" style="background-color:black">
+                                            <a href="{% url 'core:user:login' %}" class="page-scroll btn btn-btn-sm" style="margin-top: 1em; font-size:20px; color:white">
+                                                {% trans "Login" %}
+                                            </a>
+                                            </button>
+                                        {% endif %}
+                                        </div>
+                                               
+                                        <div class="img1" style="margin-left: -380px !important; margin-top: -20px !important; color:white !important; " >
+                                            <h3 style="margin-left: 40%;">Weight Tracker</h3>
                       
-                                            <p>Keep track of your progress with the body weight chart. 
-                                            This makes it easy to see if you are reaching your goals or need to adjust something.</p>
+                                            <p style="margin-left: 40%;" >Keep track of your progress with the <br/> body weight chart </p>
+                                            <!-- This makes it easy to see if you are reaching your goals or need to adjust something.</p> -->
                                         </div>
                                         </div>
     
@@ -94,11 +87,11 @@
                 
                                 <div class="item">
                                     <img src="{% static 'images/carousel-images/nutrition.jpg' %}" alt="Nutriton">
-                                    <div class="carousel-caption">
-                                            <div style="margin-right: -790px !important; margin-top:-200px !important; opacity:0.9;">
+                                    <div class="carousel-caption" style="margin-top:-480px;">
+                                            <div style="margin-right: -790px !important;">
                                                     {% if allow_guest_users and not user.is_authenticated %}
-                                                    <button class="btn-primary-outline">
-                                                            <a href="{% url 'core:user:demo-entries' %}" class="page-scroll btn btn-btn-lg" rel="nofollow" style="margin-top: 1em; font-size:20px; font-family: 'Rammetto One', cursive;">
+                                                    <button class="btn btn-secondary" style="background-color:black">
+                                                            <a href="{% url 'core:user:demo-entries' %}" class="page-scroll btn btn-btn-lg" rel="nofollow" style="margin-top: 1em; font-size:20px; color:white">
                                                                     {% trans "Try it now" %}
                                                                 </a>
                                                     </button>
@@ -107,30 +100,24 @@
                                         
                                                 {% if not user.is_authenticated or user.userprofile.is_temporary %}
                                                     {% if allow_registration %}
-                                                    <button class="btn-primary-outline">
-                                                            <a href="{% url 'core:user:registration' %}" class="page-scroll btn btn-btn-sm" style="margin-top: 1em; font-size:20px; font-family: 'Rammetto One', cursive;">
+                                                    <button class="btn btn-secondary" style="background-color:black;">
+                                                            <a href="{% url 'core:user:registration' %}" class="page-scroll btn btn-btn-sm" style="margin-top: 1em; font-size:20px; color:white">
                                                                     {% trans "Register" %}
                                                                 </a>
                                                     </button>
                                                         
                                                     {% endif %}
-                                                    <button class="btn-primary-outline">
-                                                    <a href="{% url 'core:user:login' %}" class="page-scroll btn btn-btn-sm" style="margin-top: 1em; font-size:20px; font-family: 'Rammetto One', cursive;">
+                                                    <button class="btn btn-secondary" style="background-color:black">
+                                                    <a href="{% url 'core:user:login' %}" class="page-scroll btn btn-btn-sm" style="margin-top: 1em; font-size:20px; color:white">
                                                         {% trans "Login" %}
                                                     </a>
                                                     </button>
                                                 {% endif %}
-                                            </div>
-                                        <div class="img2" style="background-color:white !important; width: 100% !important; 
-                                        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-                                        opacity:inherit;   margin-top: 80px; margin-left: -170px !important; ">
-    
-                                        <h2>
-                                                <div style="color:#204a87; font-family: 'Berkshire Swash', cursive; font-size:120px;">
-                                                        Wger
                                                 </div>
-                                                </h2>
-                                            <h3>Nutrition</h3>
+                                        <div class="img2" style="width: 100% !important; 
+                                        margin-left: -100px
+                                        ">
+                                            <h3 style="padding-top: 40%;">Nutrition</h3>
                                             <p>Create your personal diet plan by creating as many meals with as many different 
                                                 ingredients as you need. </p>
                                                 </div>
@@ -139,88 +126,78 @@
                 
                                 <div class="item">
                                     <img src="{% static 'images/carousel-images/muscles.jpeg' %}" alt="Muscles">
-                                    <div class="carousel-caption">
-                                            <div style="margin-right: -790px !important; margin-top:-200px !important; opacity:0.9;">
-                                                    {% if allow_guest_users and not user.is_authenticated %}
-                                                    <button class="btn-primary-outline">
-                                                            <a href="{% url 'core:user:demo-entries' %}" class="page-scroll btn btn-btn-lg" rel="nofollow" style="margin-top: 1em; font-size:20px; font-family: 'Rammetto One', cursive;">
-                                                                    {% trans "Try it now" %}
-                                                                </a>
-                                                    </button>
-                                                    
-                                                {% endif %}
-                                        
-                                                {% if not user.is_authenticated or user.userprofile.is_temporary %}
-                                                    {% if allow_registration %}
-                                                    <button class="btn-primary-outline">
-                                                            <a href="{% url 'core:user:registration' %}" class="page-scroll btn btn-btn-sm" style="margin-top: 1em; font-size:20px; font-family: 'Rammetto One', cursive;">
-                                                                    {% trans "Register" %}
-                                                                </a>
-                                                    </button>
-                                                        
-                                                    {% endif %}
-                                                    <button class="btn-primary-outline">
-                                                    <a href="{% url 'core:user:login' %}" class="page-scroll btn btn-btn-sm" style="margin-top: 1em; font-size:20px; font-family: 'Rammetto One', cursive;">
-                                                        {% trans "Login" %}
-                                                    </a>
-                                                    </button>
-                                                {% endif %}
-                                            </div>
-                                        <div class="img3" style="background-color:#D6EAF8; right: 20% !important; width: 100%;
-                                        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); margin-top: 80px;
-                                        opacity: 0.8">
-                                        <h2>
-                                                <div style="color:#204a87; font-family: 'Berkshire Swash', cursive; font-size:120px;">
-                                                        Wger
-                                                </div>
-                                                </h2>
-                                        <h3>Excercise Database</h3>
-                                            <p>The exercise database contains more than hundred exercises from which you can choose 
-                                                when creating a workout. You can view them by category and equipment used or muscles
-                                                 trained.</p>
+                                    <div class="carousel-caption" style="margin-top:-400px;">
+                                        <div style="margin-right: -790px !important;">
+                                            {% if allow_guest_users and not user.is_authenticated %}
+                                            <button class="btn btn-secondary" style="background-color:black">
+                                                    <a href="{% url 'core:user:demo-entries' %}" class="page-scroll btn btn-btn-lg" rel="nofollow" style="margin-top: 1em; font-size:20px; color:white">
+                                                            {% trans "Try it now" %}
+                                                        </a>
+                                            </button>
+                                            
+                                        {% endif %}
+                                
+                                        {% if not user.is_authenticated or user.userprofile.is_temporary %}
+                                            {% if allow_registration %}
+                                            <button class="btn btn-secondary" style="background-color:black;">
+                                                    <a href="{% url 'core:user:registration' %}" class="page-scroll btn btn-btn-sm" style="margin-top: 1em; font-size:20px; color:white">
+                                                            {% trans "Register" %}
+                                                        </a>
+                                            </button>
+                                                
+                                            {% endif %}
+                                            <button class="btn btn-secondary" style="background-color:black">
+                                            <a href="{% url 'core:user:login' %}" class="page-scroll btn btn-btn-sm" style="margin-top: 1em; font-size:20px; color:white">
+                                                {% trans "Login" %}
+                                            </a>
+                                            </button>
+                                        {% endif %}
+   
+                                        </div>
+                                        <div class="img3" style="padding-top: 28%; margin-left: -428px;  margin-right: -20px; margin-top:-184px";
+                                        >
+                                        <h3 style="color:#fff" >Excercise Database</h3>
+                                            <p>The exercise database has exercises for creating workouts.</p>
                                           </div>
                                         </div>    
                                 </div>
                 
                                 <div class="item">
                                     <img src="{% static 'images/carousel-images/gym-management.jpeg' %}" alt="Gym Management">
-                                    <div class="carousel-caption">
-                                            <div style="margin-right: -790px !important; margin-top:-200px !important; opacity:0.9;">
-                                                    {% if allow_guest_users and not user.is_authenticated %}
-                                                    <button class="btn-primary-outline">
-                                                            <a href="{% url 'core:user:demo-entries' %}" class="page-scroll btn btn-btn-lg" rel="nofollow" style="margin-top: 1em; font-size:20px; font-family: 'Rammetto One', cursive;">
-                                                                    {% trans "Try it now" %}
-                                                                </a>
-                                                    </button>
-                                                    
-                                                {% endif %}
-                                        
-                                                {% if not user.is_authenticated or user.userprofile.is_temporary %}
-                                                    {% if allow_registration %}
-                                                    <button class="btn-primary-outline">
-                                                            <a href="{% url 'core:user:registration' %}" class="page-scroll btn btn-btn-sm" style="margin-top: 1em; font-size:20px; font-family: 'Rammetto One', cursive;">
-                                                                    {% trans "Register" %}
-                                                                </a>
-                                                    </button>
-                                                        
-                                                    {% endif %}
-                                                    <button class="btn-primary-outline">
-                                                    <a href="{% url 'core:user:login' %}" class="page-scroll btn btn-btn-sm" style="margin-top: 1em; font-size:20px; font-family: 'Rammetto One', cursive;">
-                                                        {% trans "Login" %}
-                                                    </a>
-                                                    </button>
-                                                {% endif %}
-                                            </div>
-                                        <div class="img4" style="background-color: white; margin-top: 80px; opacity: 0.9">
+                                    <div class="carousel-caption" style="margin-top:-450px;">
+                                        <div style="margin-right: -790px !important;">
+                                            {% if allow_guest_users and not user.is_authenticated %}
+                                            <button class="btn btn-secondary" style="background-color:black">
+                                                    <a href="{% url 'core:user:demo-entries' %}" class="page-scroll btn btn-btn-lg" rel="nofollow" style="margin-top: 1em; font-size:20px; color:white">
+                                                            {% trans "Try it now" %}
+                                                        </a>
+                                            </button>
+                                            
+                                        {% endif %}
+                                
+                                        {% if not user.is_authenticated or user.userprofile.is_temporary %}
+                                            {% if allow_registration %}
+                                            <button class="btn btn-secondary" style="background-color:black;">
+                                                    <a href="{% url 'core:user:registration' %}" class="page-scroll btn btn-btn-sm" style="margin-top: 1em; font-size:20px; color:white">
+                                                            {% trans "Register" %}
+                                                        </a>
+                                            </button>
+                                                
+                                            {% endif %}
+                                            <button class="btn btn-secondary" style="background-color:black">
+                                            <a href="{% url 'core:user:login' %}" class="page-scroll btn btn-btn-sm" style="margin-top: 1em; font-size:20px; color:white">
+                                                {% trans "Login" %}
+                                            </a>
+                                            </button>
+                                        {% endif %}
+                                        </div>
+                                        <div class="img4" style=" margin-top: -46px; margin-left: -97% !important; ">
                                                 <h2>
-                                                <div style="color:#204a87; font-family: 'Berkshire Swash', cursive; font-size:120px;">
-                                                        Wger
-                                                </div>
+                                               
                                                 </h2>
                                         <h3>Gym Management</h3>
-                                            <p>Use the application for your gym to manage its members, their workouts and attendance.
-                                                 You can manage the members' contracts, keep notes and upload any files you might need
-                                                 .</p>
+                                            <p>Make Your Gym Management <br/> Easy by managing your members, <br/> their workouts and attendance. 
+                                                 </p>
                                           </div>
                                         </div>    
                                 </div>
@@ -320,22 +297,22 @@
            
                     <ul class="nav nav-tabs">
                             <li class="active">
-                                <a data-toggle="tab" class="btn btn-primary btn-lg active" href="#weight">Weight Tracker</a>
+                                <a data-toggle="tab" class="btn btn-primary btn-lg active" style="background-color: #204a87; color:#fff;" href="#weight">Weight Tracker</a>
                            
                             </li>
                             <li>
                               
-                                        <a class="btn btn-primary btn-lg active" data-toggle="tab" href="#Calender">Calender</a>
+                                        <a class="btn btn-primary btn-lg active" style="background-color: #204a87; color:#fff;" data-toggle="tab" href="#Calender">Calender</a>
                               
                             </li>
-                            <li><a class="btn btn-primary btn-lg active" data-toggle="tab" href="#exercise">Exercise</a></li>
-                            <li><a class="btn btn-primary btn-lg active" data-toggle="tab" href="#gym">Gym management</a></li>
-                            <li><a class="btn btn-primary btn-lg active" data-toggle="tab" href="#api">API</a></li>
+                            <li><a class="btn btn-primary btn-lg active" data-toggle="tab" style="background-color: #204a87; color:#fff;" href="#exercise">Exercise</a></li>
+                            <li><a class="btn btn-primary btn-lg active" data-toggle="tab" style="background-color: #204a87; color:#fff;"href="#gym">Gym management</a></li>
+                            <li><a class="btn btn-primary btn-lg active" data-toggle="tab" style="background-color: #204a87; color:#fff;" href="#api">API</a></li>
                     </ul>
 
                     <div class="tab-content tab-info">
                             <div id="weight" class="tab-pane fade in active">
-                              <h3>WEIGHT TRACKER</h3>
+                                <h3 style="font-size:1em">Weight Tracker</h3>
                               <div class = "row">
                                   <div class="col-xs-7 col-sm-6 col-lg-4"><p class = "tab-info">Keep track of your progress with the body weight chart. This makes it easy to see if you are
                                         reaching your goals or need to adjust something.
@@ -348,7 +325,7 @@
                               
                             </div>
                             <div id="Calender" class="tab-pane fade">
-                              <h3>CALENDAR</h3>
+                                <h3 style="font-size:1em">Calender</h3>
                               <div class = "row">
                                     <div class="col-xs-7 col-sm-6 col-lg-4">
                               <p class = "tab-info">
@@ -363,7 +340,7 @@
                                 </div>
                             
                                 <div id="exercise" class="tab-pane fade">
-                                        <h3>EXERCISE DATABASE</h3>
+                                        <h3 style="font-size:1em">Exercise Database</h3>
                                         <div class = "row">
                                               <div class="col-xs-7 col-sm-6 col-lg-4">
                                         <p class = "tab-info">
@@ -377,7 +354,7 @@
                                           </div>
                                           </div>
                             <div id="gym" class="tab-pane fade">
-                                    <h3>GYM MANAGEMENT</h3>
+                                <h3 style="font-size:1em">Gym Management </h3>
                                     <div class = "row">
                                             <div class="col-xs-7 col-sm-6 col-lg-4">
                                     <p class = "tab-info">Use the application for your gym to manage its members, their workouts and attendance.
@@ -390,7 +367,7 @@
                                         </div>
                                   </div>
                                   <div id="api" class="tab-pane fade">
-                                        <h3>REST API</h3>
+                                    <h3 style="font-size:1em">Rest API</h3>
                                         <div class = "row">
                                                 <div class="col-xs-7 col-sm-6 col-lg-4">
                                         <p class = "tab-info">wger provides a REST API with full read and write access to all data so you can integrate
