@@ -102,7 +102,7 @@ function wgerSetupSortable() {
  */
 
 
-/*
+ /*
  Updates a single field in the user profile
  */
 function setProfileField(field, newValue) {
@@ -244,10 +244,10 @@ function modalDialogFormEdit() {
 
     // Show a loader while we fetch the real page
     $form.html('<div style="text-align:center;">' +
-      '<img src="/static/images/loader.svg" ' +
-      'width="48" ' +
-      'height="48"> ' +
-      '</div>');
+        '<img src="/static/images/loader.svg" ' +
+        'width="48" ' +
+        'height="48"> ' +
+        '</div>');
     $('#ajax-info-title').html('Processing'); // TODO: translate this
 
     // OK, we did the POST, what do we do with the result?
@@ -319,53 +319,53 @@ function wgerFormModalDialog() {
     // Show a loader while we fetch the real page
     $ajaxInfoContent = $('#ajax-info-content');
     $ajaxInfoContent.html('<div style="text-align:center;">' +
-      '<img src="/static/images/loader.svg" ' +
-      'width="48" ' +
-      'height="48"> ' +
-      '</div>');
+        '<img src="/static/images/loader.svg" ' +
+        'width="48" ' +
+        'height="48"> ' +
+        '</div>');
     $('#ajax-info-title').html('Loading...');
     $('#wger-ajax-info').modal('show');
 
-    $ajaxInfoContent.load(targetUrl + ' .form-horizontal',
+    $ajaxInfoContent.load(targetUrl + ' .form-horizontal', 
       function (responseText, textStatus, XMLHttpRequest) {
-        var $ajaxInfoTitle;
-        var modalTitle;
-        $ajaxInfoTitle = $('#ajax-info-title');
-        if (textStatus === 'error') {
-          $ajaxInfoTitle.html('Sorry but an error occured');
-          $('#ajax-info-content').html(XMLHttpRequest.status + ' ' + XMLHttpRequest.statusText);
-        }
+      var $ajaxInfoTitle;
+      var modalTitle;
+      $ajaxInfoTitle = $('#ajax-info-title');
+      if (textStatus === 'error') {
+        $ajaxInfoTitle.html('Sorry but an error occured');
+        $('#ajax-info-content').html(XMLHttpRequest.status + ' ' + XMLHttpRequest.statusText);
+      }
 
-        // Call other custom initialisation functions
-        // (e.g. if the form as an autocompleter, it has to be initialised again)
-        if (typeof wgerCustomModalInit !== 'undefined') {
-          // Function is defined in templates. Eslint doesn't check the templates resulting in a
-          // un-def error message.
-          wgerCustomModalInit(); // eslint-disable-line no-undef
-        }
+      // Call other custom initialisation functions
+      // (e.g. if the form as an autocompleter, it has to be initialised again)
+      if (typeof wgerCustomModalInit !== 'undefined') {
+        // Function is defined in templates. Eslint doesn't check the templates resulting in a
+        // un-def error message.
+        wgerCustomModalInit(); // eslint-disable-line no-undef
+      }
 
-        // Set the new title
-        modalTitle = '';
-        if ($(responseText).find('#page-title').length > 0) {
-          // Complete HTML page
-          modalTitle = $(responseText).find('#page-title').html();
-        } else {
-          // Page fragment
-          modalTitle = $(responseText).filter('#page-title').html();
-        }
-        $ajaxInfoTitle.html(modalTitle);
+      // Set the new title
+      modalTitle = '';
+      if ($(responseText).find('#page-title').length > 0) {
+        // Complete HTML page
+        modalTitle = $(responseText).find('#page-title').html();
+      } else {
+        // Page fragment
+        modalTitle = $(responseText).filter('#page-title').html();
+      }
+      $ajaxInfoTitle.html(modalTitle);
 
-        // If there is a form in the modal dialog (there usually is) prevent the submit
-        // button from submitting it and do it here with an AJAX request. If there
-        // are errors (there is an element with the class 'ym-error' in the result)
-        // reload the content back into the dialog so the user can correct the entries.
-        // If there isn't assume all was saved correctly and load that result into the
-        // page's main DIV (#main-content). All this must be done like this because there
-        // doesn't seem to be any reliable and easy way to detect redirects with AJAX.
-        if ($(responseText).find('.form-horizontal').length > 0) {
-          modalDialogFormEdit();
-        }
-      });
+      // If there is a form in the modal dialog (there usually is) prevent the submit
+      // button from submitting it and do it here with an AJAX request. If there
+      // are errors (there is an element with the class 'ym-error' in the result)
+      // reload the content back into the dialog so the user can correct the entries.
+      // If there isn't assume all was saved correctly and load that result into the
+      // page's main DIV (#main-content). All this must be done like this because there
+      // doesn't seem to be any reliable and easy way to detect redirects with AJAX.
+      if ($(responseText).find('.form-horizontal').length > 0) {
+        modalDialogFormEdit();
+      }
+    });
   });
 }
 
@@ -423,9 +423,37 @@ function getExerciseFormset(exerciseId) {
       $formsets.append(data);
       $('#exercise-search-log').scrollTop(0);
       $formsets.trigger('create');
+      if ($('#drop-set-checkbox').is(':checked')) {
+        disableRepsUnits();
+        $('#repetitions').hide();
+      } else {
+        $('#repetitions').show();
+      };
     });
   }
 }
+
+// Disable the reps column
+function disableRepsUnits() {
+  var checked = $('#drop-set-checkbox').prop('checked');
+  $('.field-reps input')
+    .val(0)
+    .parent()
+    .toggle();
+  $('.form-header-reps').toggle();
+  $('.field-repetition_unit')
+    .toggleClass('drop-set-reflow')
+    .children()
+    .val(2);
+  $('.field-repetition_unit select.main').prop('disabled', checked);
+  $('.form-header-repetition_unit').toggleClass('drop-set-reflow');
+  $('.numbering').toggleClass('drop-set-reflow');
+}
+
+$(document).on('change', 'input[name="drop-set"]', function () {
+  disableRepsUnits();
+  $('#repetitions').toggle();
+});
 
 /*
  Updates all exercise formsets, e.g. when the number of sets changed
@@ -452,6 +480,12 @@ function updateAllExerciseFormset() {
             $formsets.append(data);
             $('#exercise-search-log').scrollTop(0);
             $formsets.trigger('create');
+            if ($('#drop-set-checkbox').is(':checked')) {
+              disableRepsUnits();
+              $('#repetitions').hide();
+            } else {
+              $('#repetitions').show();
+            }
           }).promise();
         });
       }
