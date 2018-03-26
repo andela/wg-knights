@@ -25,5 +25,8 @@
     "metrics-graphics": "^2.12.0",
     "devbridge-autocomplete": "1.2.x",
     "chart.js": "^2.7.1"
+  },
+  "resolutions": {
+    "components-font-awesome": "^4.7.0"
   }
 }
