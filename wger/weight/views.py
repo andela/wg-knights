@@ -30,6 +30,7 @@ from django.db.models import Min
 from django.db.models import Max
 from django.views.generic import CreateView
 from django.views.generic import UpdateView
+from django.contrib.auth.models import User
 
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
@@ -185,7 +186,20 @@ def get_weight_data(request, username=None):
     # Return the results to the client
     return Response(chart_data)
 
+@api_view(['GET'])
+def get_user_weight_data(request, username=None):
+    '''
+    Process data and pass it to the js lib for generation of an SVG image
+    '''
+    user = User.objects.filter(username=username)
+    weights= WeightEntry.objects.filter(user=user)
 
+    chart_data = []
+
+    for i in weights:
+        chart_data.append({'date':i.date, 'weight':i.weight})
+
+    return Response(chart_data)
 class WeightCsvImportFormPreview(FormPreview):
     preview_template = 'import_csv_preview.html'
     form_template = 'import_csv_form.html'
